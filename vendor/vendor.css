@@ -1,0 +1,41 @@
+/*
+검은색 : 2A2A2A
+골드색 : D6AB4F
+볼드처리 : 714D00
+*/
+*{font-family:Nanum Gothic,'맑은 고딕',Malgun Gothic;margin:0;}
+
+body{background-color:#fafafa}
+
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./css/NanumGothic-Regular.eot);
+  src: url(./css/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+       url(./css/NanumGothic-Regular.woff2) format('woff2'),
+       url(./css/NanumGothic-Regular.woff) format('woff'),
+       url(./css/NanumGothic-Regular.ttf) format('truetype');
+}
+
+.confirm_wrapper{width:100%;margin:0 auto}
+.confirm_wrapper .header{width:100%;height:40px;line-height:36px;text-align:center;font-size:15px;background-color:#D6AB4F;color:#fff;font-weight:bold}
+.confirm_wrapper .body{width:100%;max-width:460px;height:202px;padding:40px 10px;box-sizing:border-box;margin:0 auto;}
+.confirm_wrapper .body > div{width:100%;height:36px;margin-bottom:10px;}
+.confirm_wrapper .body > div > span{display:inline-block;font-weight:bold;width:70px;}
+.confirm_wrapper .body > div > input{display:inline-block;height:30px;width:100%;max-width:100px}
+.confirm_wrapper .body > div > input.nm{width:calc(100% - 90px);max-width:250px;}
+.confirm_wrapper .body > div > input.ph{width:calc(24% - 10px);max-width:100px;text-align:center}
+.confirm_wrapper .body > div > input.pw{width:calc(100% - 90px);max-width:320px;text-align:center}
+.confirm_wrapper .guide{border:1px solid #d9d7d7;margin:10px;padding:15px 10px;font-size:14px;line-height:22px}
+
+.list_wrapper{box-sizing:border-box}
+.list_wrapper .table{width:100%;max-width:1200px;min-width:900px;margin:0 auto}
+.list_wrapper .table .thead-inverse th{background-color:#292b2c;color:#fff;text-align:center;font-size:12px;}
+.list_wrapper .table td{text-align:center;font-size:12px}
+.list_wrapper .table td.tal{text-align:left}
+.list_wrapper .table td input{text-align:right;width:100%;position:relative;top:-3px;}
+
+.confirm_wrapper .btn_wrap{width:100%;text-align:center;margin:20px 0}
+.confirm_wrapper .btn_wrap .btn{background-color:#D6AB4F;color:#fff}
+.list_wrapper .btn_wrap{width:100%;max-width:1200px;min-width:900px;text-align:center;margin:20px auto}

@@ -1,0 +1,18 @@
+html, body{width:100%;height:100%;overflow:hidden;background-color:#fff}
+/*
+.bgArea{position:absolute;top:0;left:0;width:100%;height:100%;background:url(../img/bg1.jpg) no-repeat center center fixed;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover}
+.bgArea2{position:absolute;top:0;left:0;width:100%;height:100%;background:url(../img/bg2.jpg) no-repeat center center fixed;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;opacity:0}
+*/
+.bgArea{position:absolute;top:0;left:0;width:100%;height:100%;background:#696969;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover}
+.loginWarning{display:none;opacity:0;width:312px;height:31px;color:#f0f0f0;text-align:center;position:absolute;top:50%;left:50%;margin:-156px 0 0 -156px;padding:4px;box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);border:1px solid #000;background:rgba(247,93,43,0.4);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#40f75d2b,endColorstr=#40f75d2b)}
+.loginFrm_wrap{width:312px;height:154px;position:absolute;top:50%;left:50%;margin:-120px 0 0 -156px;box-shadow:0 3px 7px rgba(0, 0, 0, 0.3);border:1px solid #000;background:rgba(32,30,33,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#60201e21,endColorstr=#60201e21)}
+.loginFrm_wrap .loginFrm_border{border:1px solid #686669;width:100%;height:100%;position:relative}
+.loginFrm_wrap .tit{position:absolute;top:0;left:0;width:100%;line-height:54px;text-align:center;font-size:18px;color:#fff;border-bottom:1px solid #0E0C0E;font-family:sans-serif;letter-spacing:0.5px}
+.loginFrm_wrap .btn_wrap{width:290px;position:absolute;top:104px;right:9px;border:1px solid #0E0D0F}
+.loginFrm_wrap .id_wrap{width:290px;height:36px;position:absolute;top:10px;left:10px;border:1px solid #000}
+.loginFrm_wrap .pw_wrap{width:290px;height:36px;position:absolute;top:56px;left:10px;border:1px solid #000}
+.loginFrm_wrap .id_wrap img, .loginFrm_wrap .pw_wrap img{height:34px;position:absolute;top:0;left:0}
+.loginFrm_wrap .id_wrap input, .loginFrm_wrap .pw_wrap input{position:absolute;top:0;right:0;width:254px;height:34px;border-radius:0;background-color:#363636;border:0;color:#fff}
+#login_btn{width:100%;height:100%;border-top:1px solid #686669;border-left:1px solid #3B3B3B;border-right:1px solid #3B3B3B;border-bottom:1px solid #313131;border-radius:0;font-family:sans-serif;letter-spacing:0.5px}
+.copyright{position:absolute;top:246px;font-size:12px;width:312px;text-align:center;color:#c36d24}
+.logimg{margin-top:10px;text-align:center}

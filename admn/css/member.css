@@ -1,0 +1,28 @@
+.content_list{margin-left:30px;max-width:900px;width:97%}
+.content_list.view{min-width:auto;width:auto}
+.content_list.view table{width:auto}
+.content_list .content_top{position:relative;width:100%}
+.content_list .content_top > div{text-align:right}
+.content_list table{margin-top:20px;font-size:13px;width:100%}
+.content_list .cb{display:inline}
+.content_list tbody td{text-align:center;vertical-align:middle !important}
+.content_list tbody th{text-align:left}
+.content_list tbody .tal{text-align:left}
+.thead-inverse th{background-color:#292b2c;color:#fff;text-align:center}
+
+.fwb{font-weight:bold}
+
+.totcnt{margin:0 10px;font-weight:bold;color:#b11a1a;display:inline-block;font-size:12px}
+input[name=sid]{width:200px;display:inline-block}
+
+.frmfoot{text-align:right}
+
+.content_write{margin:30px 0 0 20px;width:700px;}
+.content_left{margin-top:30px;padding-left:183px}
+
+#id{width:150px}
+.useid, .notuseid{position:absolute;top:4px;left:180px;display:none;}
+.useid{color:#AC0000}
+.notuseid{color:#30AC30}
+
+.txt{position:relative;top:6px}

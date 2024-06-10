@@ -1,0 +1,20 @@
+#content{min-width:1000px}
+.access_list_wrap{width:580px;height:500px;overflow-y:scroll;border:1px solid #888888;margin-left:25px;position:relative;float:left;padding:10px}
+.access_list_wrap .legend{font-weight:bold;border-bottom:1px solid #888888;padding-bottom:10px}
+.access_list_wrap .list_wrap{margin-top:10px}
+.access_list_wrap .list_wrap p{font-size:12px;width:100%}
+.access_list_wrap .list_wrap p span{display:inline-block;border-radius:50%;background:#263238;color:#fff;width:20px;height:20px;text-align:center;margin-right:10px;line-height:20px;position:relative;top:1px}
+.access_list_wrap .list_wrap p button{margin-left:4px}
+
+.block_list_wrap{width:300px;height:500px;overflow-y:scroll;border:1px solid #888888;margin-left:25px;position:relative;float:left;padding:10px}
+.block_list_wrap .legend{font-weight:bold;border-bottom:1px solid #888888;padding-bottom:10px}
+.block_list_wrap .list_wrap{margin-top:10px}
+.block_list_wrap .list_wrap p{font-size:12px;width:100%}
+.block_list_wrap .list_wrap p span{display:inline-block;border-radius:50%;background:#263238;color:#fff;width:20px;height:20px;text-align:center;margin-right:10px;line-height:20px;position:relative;top:1px}
+.block_list_wrap .list_wrap p button{margin-left:4px}
+
+.pwch_wrap{width:320px;height:155px;border:1px solid #888888;margin-left:25px;position:absolute;top:157px;left:360px;padding:10px;z-index:1040;background-color:#e4e4e4;display:none}
+.pwch_wrap span{font-weight:bold}
+.pwch_wrap input{width:300px;margin-top:10px;padding:0 4px}
+.pwch_wrap .closebtn{position:absolute;top:0;right:0}
+.pwch_wrap .pwchbtn{width:300px;margin-top:10px}
