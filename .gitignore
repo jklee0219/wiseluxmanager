@@ -1,0 +1,4 @@
+file/
+log/
+admn/application/config/database.php
+admn/application/logs/
