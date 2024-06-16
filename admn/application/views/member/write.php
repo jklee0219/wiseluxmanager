@@ -57,9 +57,18 @@
 					</div>
 				</div>
 				<div class="form-group">
-            	<div class="fwb col-sm-3 control-label" for="class">직책</div>
+            		<div class="fwb col-sm-3 control-label" for="class">직책</div>
 					<div class="col-sm-4 pt2">
 						<input type='text' maxlength="20" class='form-control input-sm' autocomplete="off" name='class' id="class">
+					</div>
+				</div>
+				<div class="form-group">
+            		<div class="fwb col-sm-3 control-label" for="work_status">근무현황</div>
+					<div class="col-sm-4 pt2">
+						<select class='form-control input-sm' name="work_status">
+							<option value="근무중">근무중</option>
+							<option value="퇴사">퇴사</option>
+						</select>
 					</div>
 				</div>
 				<div class="form-group">

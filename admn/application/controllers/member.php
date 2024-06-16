@@ -123,6 +123,7 @@ class Member extends CI_Controller
         $class = $this->input->post('class', TRUE) ? trim($this->input->post('class', TRUE)) : '';
         $phone = $this->input->post('phone', TRUE) ? trim($this->input->post('phone', TRUE)) : '';
         $ordernum = $this->input->post('ordernum', TRUE) ? trim($this->input->post('ordernum', TRUE)) : 0;
+        $work_status = $this->input->post('work_status', TRUE) ? trim($this->input->post('work_status', TRUE)) : '근무중';
 
         if($id == '' || $password == ''){
             doMsgLocation('잘못된 요청입니다. 시스템 관리자에게 문의 하십시요.', "http://".$_SERVER['HTTP_HOST']."/admn/member/write?".$param);
@@ -136,7 +137,8 @@ class Member extends CI_Controller
             'class' => $class,
             'phone' => $phone,
             'auth' => $auth,
-            'ordernum' => $ordernum
+            'ordernum' => $ordernum,
+            'work_status' => $work_status
         );
         
         $this->Member_model->insertList($data);
@@ -185,6 +187,7 @@ class Member extends CI_Controller
         $class = $this->input->post('class', TRUE) ? trim($this->input->post('class', TRUE)) : '';
         $phone = $this->input->post('phone', TRUE) ? trim($this->input->post('phone', TRUE)) : '';
         $ordernum = $this->input->post('ordernum', TRUE) ? trim($this->input->post('ordernum', TRUE)) : 0;
+        $work_status = $this->input->post('work_status', TRUE) ? trim($this->input->post('work_status', TRUE)) : '근무중';
         
         //유효성 체크
         if($seq == ''){
@@ -196,7 +199,8 @@ class Member extends CI_Controller
             'class' => $class,
             'phone' => $phone,
             'auth' => $auth,
-            'ordernum' => $ordernum
+            'ordernum' => $ordernum,
+            'work_status' => $work_status
         );
 
         if(!empty($password)){

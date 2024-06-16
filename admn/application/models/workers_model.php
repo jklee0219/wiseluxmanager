@@ -13,6 +13,7 @@ class Workers_model extends CI_Model
       if(isset($condition['sid'])){
          $this->db->where('id', $condition['sid']); 
       }
+      $this->db->where('work_status', '근무중'); 
       if($scale != "N") $this->db->limit($scale, $first);
       $this->db->order_by('ordernum', 'desc');
       $result = $this->db->get()->result();
