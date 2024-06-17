@@ -45,7 +45,7 @@ function getPurchaseInfoFromCode(){
                     $('#purchase_modelname').text(res.data.modelname);
                 }else if(res.result == 'already'){
                     if(confirm('이미 등록된 데이터가 존재 합니다.\n이동하시겠습니까?')){
-                        location.href = '/admn/productmvdate/modify?seq='+res.data.tb_goodsmove_seq;
+                        location.href = '/admn/productmvdate/modify?seq='+res.data.tb_productmovedate_seq;
                     }
                 }else if(res.result == 'notfound'){
                     alert('해당 코드를 찾을수 없습니다.');

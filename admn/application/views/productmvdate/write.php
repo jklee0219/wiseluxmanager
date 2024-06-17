@@ -5,7 +5,7 @@
    <link rel="stylesheet" href="/admn/css/productmvdate.css?<?=time()?>">
    <script src="/admn/js/jquery.number.min.js"></script>
    <script src="/admn/js/comma.js"></script>
-   <script src="/admn/js/productmvdate_write.js?v=1"></script>
+   <script src="/admn/js/productmvdate_write.js?v=2"></script>
 </head>
 <body>
 

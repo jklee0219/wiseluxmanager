@@ -132,15 +132,35 @@
 
 			var calendarEl = document.getElementById('calendar');
 			var tooltip = document.getElementById('tooltip');
+			var events = [
+				<?php foreach($alllist as $item){ ?>
+				{ title: '<?=$item->shipplace?> -> <?=$item->reciveplace?>', start: '<?=$item->movedate?>', description: '<?=$item->shipplace?> -> <?=$item->reciveplace?>' },
+				<?php } ?>
+			];
+
+			var eventCounts = {};
+
+			events.forEach(function(event) {
+				var date = event.start;
+				if (!eventCounts[date]) {
+					eventCounts[date] = { count: 0, description: [] };
+				}
+				eventCounts[date].count++;
+				eventCounts[date].description.push(event.description);
+			});
+
+			var groupedEvents = Object.keys(eventCounts).map(function(date) {
+				return {
+					title: eventCounts[date].count + '개의 이동',
+					start: date,
+					description: eventCounts[date].description.join('<br>')
+				};
+			});
 
 			var calendar = new FullCalendar.Calendar(calendarEl, {
 				locale: 'ko',
 				initialView: 'dayGridMonth',
-				events: [
-					<?php foreach($alllist as $item){ ?>
-					{ title: '<?=$item->shipplace?> -> <?=$item->reciveplace?>', start: '<?=$item->movedate?>', description: '<?=$item->shipplace?> -> <?=$item->reciveplace?>' },
-					<?php } ?>
-				],
+				events: groupedEvents,
 				eventMouseEnter: function(info) {
 					tooltip.innerHTML = info.event.extendedProps.description;
 					tooltip.style.display = 'block';
