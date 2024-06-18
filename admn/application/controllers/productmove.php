@@ -101,6 +101,9 @@ class Productmove extends CI_Controller
             }
             $paging_html .= '</ul>';
         }
+
+        //달력 전체 리스트
+        $alllist = $this->Goodsmove_model->getAllList();
         
         $data = array(
             "sstype" => $sstype,
@@ -124,6 +127,7 @@ class Productmove extends CI_Controller
             "param" => $param,
             "movenCnt" => $movenCnt,
             "moveyCnt" => $moveyCnt,
+            'alllist' => $alllist
         );
         
         $this->load->view('goodsmove/list', $data);

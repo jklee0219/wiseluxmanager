@@ -2,11 +2,14 @@
 <html lang='ko'>
 <head>
    <?php include $_SERVER['DOCUMENT_ROOT'].'/admn/application/views/comm/head.php'; ?>
-   <link rel="stylesheet" href="/admn/css/goodsmove.css">
-   <script src="/admn/js/goodsmove.js?<?=time()?>"></script>
+   <link rel="stylesheet" href="/admn/css/productmvdate.css">
+   <script src="/admn/js/productmvdate.js?<?=time()?>"></script>
    <script>
    var qs = "<?=$param?>";
    </script>
+   <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/ko.js'></script>
 </head>
 <body>
 
@@ -61,7 +64,7 @@
                         </div>
                   		<div class="startdate_wrap">
 	               			<div class="input-group date">
-							    <input type="text" name="ssdate" class="form-control input-sm" autocomplete="off" placeholder="발송일 시작" value="<?=$sshipdate?>">
+							    <input type="text" name="sshipdate" class="form-control input-sm" autocomplete="off" placeholder="발송일 시작" value="<?=$sshipdate?>">
 							    <div class="input-group-addon input-sm">
 							        <span class="glyphicon glyphicon-calendar"></span>
 							    </div>
@@ -69,7 +72,7 @@
 						</div>~
 						<div class="enddate_wrap">
 	               			<div class="input-group date">
-							    <input type="text" name="sedate" class="form-control input-sm" autocomplete="off" placeholder="발송일 끝" value="<?=$eshipdate?>">
+							    <input type="text" name="eshipdate" class="form-control input-sm" autocomplete="off" placeholder="발송일 끝" value="<?=$eshipdate?>">
 							    <div class="input-group-addon input-sm">
 							        <span class="glyphicon glyphicon-calendar"></span>
 							    </div>
@@ -77,7 +80,7 @@
 						</div>
 						<div class="startdate_wrap">
                             <div class="input-group date">
-                                <input type="text" name="ssdate" class="form-control input-sm" autocomplete="off" placeholder="수령일 시작" value="<?=$srecivedate?>">
+                                <input type="text" name="srecivedate" class="form-control input-sm" autocomplete="off" placeholder="수령일 시작" value="<?=$srecivedate?>">
                                 <div class="input-group-addon input-sm">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </div>
@@ -85,7 +88,7 @@
                         </div>~
                         <div class="enddate_wrap">
                             <div class="input-group date">
-                                <input type="text" name="sedate" class="form-control input-sm" autocomplete="off" placeholder="수령일 끝" value="<?=$erecivedate?>">
+                                <input type="text" name="erecivedate" class="form-control input-sm" autocomplete="off" placeholder="수령일 끝" value="<?=$erecivedate?>">
                                 <div class="input-group-addon input-sm">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </div>
@@ -109,100 +112,140 @@
 				</div>
          	</div>
 	
-         	<form name="frm" action="" method="post">
-	            <table class="table">
-	               <thead class="thead-inverse">
-	                  <tr>
-	                     <th>번호</th>
-	                     <th>상품코드</th>
-						 <th>사진</th>
-	                     <th>매입일자</th>
-	                     <th>구분</th>
-	                     <th>종류</th>
-	                     <th>매입지점</th>
-	                     <th>모델명</th>
-	                     <th>발송일자</th>
-                         <th>수령일자</th>
-                         <th>이동결과</th>
-                         <th>발송지점</th>
-                         <th>수령지점</th>
-                         <th>수령인</th>
-	                     <th></th>
-	                  </tr>
-	               </thead>
-	               <tbody>
-	               <?php
-	               if($board_list)
-	               {
-	                  foreach($board_list as $k => $v)
-	                  {
-	                     $seq = $v->seq;
-	                     $pcode = $v->pcode;
-	                     $thumb = $v->thumb;
-	                     if(!$thumb) $thumb = '/admn/img/noimg_l.jpg';
-	                  	 $pdate = $v->pdate;
-						 if($pdate){
-							 $pdate = strtotime($pdate);
-							 $pdate = date('Y-m-d', $pdate);
-						 }else{
-						 	$pdate = '';
-						 }
-						 $modelname = $v->modelname;
-                         $shipdate = $v->shipdate;
-                         if($shipdate){
-                             $shipdate = strtotime($shipdate);
-                             $shipdate = date('Y-m-d', $shipdate);
-                         }else{
-                            $shipdate = '';
-                         }
-                         $recivedate = $v->recivedate;
-                         if($recivedate){
-                             $recivedate = strtotime($recivedate);
-                             $recivedate = date('Y-m-d', $recivedate);
-                         }else{
-                            $recivedate = '';
-                         }
-                         $c24_display = $v->c24_display;
-	               ?>
-	                  <tr<?=($v->moveyn=='Y') ? ' class="active"' : ''?>>
-	                     <td><?=$seq?></td>
-	                     <td class="c24_display_<?=$c24_display?>"><?=$pcode?></td>
-	                     <td><div class="thumb"><img src="<?=$thumb?>"></div></td>
-	                     <td><?=$pdate?></td>
-	                     <td><?=$v->type?></td>
-                         <td><?=$v->kind?></td>
-                         <td><?=$v->place?></td>
-	                     <td><?=$modelname?></td>
-	                     <td><?=$shipdate?></td>
-	                     <td><?=$recivedate?></td>
-	                     <td><?=$goodsmove_yn[$v->moveyn]?></td>
-	                     <td><?=$v->shipplace?></td>
-                         <td><?=$v->reciveplace?></td>
-                         <td><?=$v->reciveman?></td>
-	                     <td>
-	                     	<button type="button" onclick="location.href='/admn/productmove/modify?seq=<?=$seq?>&<?=$param?>'" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-wrench"></i> 수정</button>
-	                     </td>
-	            	  </tr>
-	               <?php
-	                  }
-	               }
-	               ?>
-	               </tbody>
-	            </table>
-         	</form>
-			
-		 	<iframe name="hiddenFrm" src=""></iframe>
-		
-	         <div class="content_bottom">
-	            <div class="content_left"></div>
-	            <div class="content_middle"><?=$paging_html?></div>
-	         </div>
+         	<div class="calendar_wrap">
+                <div>
+                    <div id='calendar'></div>
+                    <div id="tooltip"></div>
+                </div>
+                <div>
+                    <table class="table">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>상품코드</th>
+                                <th>사진</th>
+                                <th>발송일자</th>
+                                <th>모델명</th>
+                                <th>이동결과</th>
+                                <th>발송지점</th>
+                                <th>수령지점</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        if($board_list)
+                        {
+                            foreach($board_list as $k => $v)
+                            {
+                                $seq = $v->seq;
+                                $pcode = $v->pcode;
+                                $thumb = $v->thumb;
+                                if(!$thumb) $thumb = '/admn/img/noimg_l.jpg';
+                                $pdate = $v->pdate;
+                                if($pdate){
+                                    $pdate = strtotime($pdate);
+                                    $pdate = date('Y-m-d', $pdate);
+                                }else{
+                                    $pdate = '';
+                                }
+                                $modelname = $v->modelname;
+                                $shipdate = $v->shipdate;
+                                if($shipdate){
+                                    $shipdate = strtotime($shipdate);
+                                    $shipdate = date('Y-m-d', $shipdate);
+                                }else{
+                                   $shipdate = '';
+                                }
+                                $moveyn = $v->moveyn;
+                        ?>
+                            <tr<?=($moveyn=='Y') ? ' class="active"' : ''?>>
+                                <td><?=$pcode?></td>
+                                <td><div class="thumb"><img src="<?=$thumb?>"></div></td>
+                                <td><?=$shipdate?></td>
+                                <td class="tal"><?=$modelname?></td>
+                                <td><?=($v->moveyn == 'N' ? '미처리' : '처리완료')?></td>
+                                <td><?=$v->shipplace?></td>
+                                <td><?=$v->reciveplace?></td>
+                                <td>
+                                    <button type="button" onclick="location.href='/admn/productmove/modify?seq=<?=$seq?>&<?=$param?>'" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-wrench"></i> 수정</button>
+                                </td>
+                            </tr>
+                        <?php
+                            }
+                        }
+                        ?>
+                        </tbody>
+                    </table>    
+                </div>
+            </div>
+            
+            <iframe name="hiddenFrm" src=""></iframe>
+        
+             <div class="content_bottom">
+                <div class="content_left"></div>
+                <div class="content_middle"><?=$paging_html?></div>
+             </div>
 
-      	</div>
+        </div>
       
-   	</div>
+    </div>
 
-   	<?php include $_SERVER['DOCUMENT_ROOT'].'/admn/application/views/comm/footer.php';?>
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/admn/application/views/comm/footer.php';?>
 
+    <script>
+        $(document).ready(function(){
+
+            var calendarEl = document.getElementById('calendar');
+            var tooltip = document.getElementById('tooltip');
+            var events = [
+                <?php foreach($alllist as $item){ ?>
+                { title: '<?=$item->shipplace?> -> <?=$item->reciveplace?>', start: '<?=date('Y-m-d', strtotime($item->shipdate))?>', description: '<?=$item->shipplace?> -> <?=$item->reciveplace?>' },
+                <?php } ?>
+            ];
+
+            var eventCounts = {};
+
+            events.forEach(function(event) {
+                var date = event.start;
+                if (!eventCounts[date]) {
+                    eventCounts[date] = { count: 0, description: [] };
+                }
+                eventCounts[date].count++;
+                eventCounts[date].description.push(event.description);
+            });
+
+            var groupedEvents = Object.keys(eventCounts).map(function(date) {
+                return {
+                    title: eventCounts[date].count + '개의 이동',
+                    start: date,
+                    description: eventCounts[date].description.join('<br>')
+                };
+            });
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'ko',
+                initialView: 'dayGridMonth',
+                events: groupedEvents,
+                eventMouseEnter: function(info) {
+                    tooltip.innerHTML = info.event.extendedProps.description;
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = info.jsEvent.pageX + 10 + 'px';
+                    tooltip.style.top = info.jsEvent.pageY + 10 + 'px';
+                },
+                eventMouseLeave: function(info) {
+                    tooltip.style.display = 'none';
+                }
+            });
+
+            calendar.render();
+
+            document.addEventListener('mousemove', function(e) {
+                if (tooltip.style.display === 'block') {
+                    tooltip.style.left = e.pageX + 10 + 'px';
+                    tooltip.style.top = e.pageY + 10 + 'px';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

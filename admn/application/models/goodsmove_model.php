@@ -22,13 +22,13 @@ class Goodsmove_model extends CI_Model
   	$this->db->from('tb_goodsmove');
     $this->db->join('tb_purchase', 'tb_purchase.seq = tb_goodsmove.purchase_seq', 'left');
     $this->db->join('tb_goods', 'tb_goodsmove.purchase_seq = tb_goods.purchase_seq', 'left');
-    if(isset($condition['sbrand'])) $this->db->where("sbrand", $condition['sbrand']);
-    if(isset($condition['skind'])) $this->db->where("skind", $condition['skind']);
-    if(isset($condition['sstype'])) $this->db->where("stype", $condition['sstype']);
-  	if(isset($condition['sshipdate'])) $this->db->where("sshipdate >= '".$condition['sshipdate']." 00:00:00'", NULL, FALSE);
-    if(isset($condition['eshipdate'])) $this->db->where("eshipdate <= '".$condition['eshipdate']." 23:59:59'", NULL, FALSE);
-    if(isset($condition['srecivedate'])) $this->db->where("srecivedate >= '".$condition['srecivedate']." 00:00:00'", NULL, FALSE);
-    if(isset($condition['erecivedate'])) $this->db->where("erecivedate <= '".$condition['erecivedate']." 23:59:59'", NULL, FALSE);
+    if(isset($condition['sbrand'])) $this->db->where("brand_seq", $condition['sbrand']);
+    if(isset($condition['skind'])) $this->db->where("kind", $condition['skind']);
+    if(isset($condition['sstype'])) $this->db->where("type", $condition['sstype']);
+  	if(isset($condition['sshipdate'])) $this->db->where("shipdate >= '".$condition['sshipdate']." 00:00:00'", NULL, FALSE);
+    if(isset($condition['eshipdate'])) $this->db->where("shipdate <= '".$condition['eshipdate']." 23:59:59'", NULL, FALSE);
+    if(isset($condition['srecivedate'])) $this->db->where("recivedate >= '".$condition['srecivedate']." 00:00:00'", NULL, FALSE);
+    if(isset($condition['erecivedate'])) $this->db->where("recivedate <= '".$condition['erecivedate']." 23:59:59'", NULL, FALSE);
   	if(isset($condition['stype']) && isset($condition['skeyword'])) {
   		$stype = $condition['stype'];
   		$skeyword = $condition['skeyword'];
@@ -57,13 +57,13 @@ class Goodsmove_model extends CI_Model
     $this->db->from('tb_goodsmove');
     $this->db->join('tb_purchase', 'tb_purchase.seq = tb_goodsmove.purchase_seq', 'left');
     $this->db->join('tb_goods', 'tb_goodsmove.purchase_seq = tb_goods.purchase_seq', 'left');
-  	if(isset($condition['sbrand'])) $this->db->where("sbrand", $condition['sbrand']);
-    if(isset($condition['skind'])) $this->db->where("skind", $condition['skind']);
-    if(isset($condition['sstype'])) $this->db->where("stype", $condition['sstype']);
-    if(isset($condition['sshipdate'])) $this->db->where("sshipdate >= '".$condition['sshipdate']." 00:00:00'", NULL, FALSE);
-    if(isset($condition['eshipdate'])) $this->db->where("eshipdate <= '".$condition['eshipdate']." 23:59:59'", NULL, FALSE);
-    if(isset($condition['srecivedate'])) $this->db->where("srecivedate >= '".$condition['srecivedate']." 00:00:00'", NULL, FALSE);
-    if(isset($condition['erecivedate'])) $this->db->where("erecivedate <= '".$condition['erecivedate']." 23:59:59'", NULL, FALSE);
+  	if(isset($condition['sbrand'])) $this->db->where("brand_seq", $condition['sbrand']);
+    if(isset($condition['skind'])) $this->db->where("kind", $condition['skind']);
+    if(isset($condition['sstype'])) $this->db->where("type", $condition['sstype']);
+    if(isset($condition['sshipdate'])) $this->db->where("shipdate >= '".$condition['sshipdate']." 00:00:00'", NULL, FALSE);
+    if(isset($condition['eshipdate'])) $this->db->where("shipdate <= '".$condition['eshipdate']." 23:59:59'", NULL, FALSE);
+    if(isset($condition['srecivedate'])) $this->db->where("recivedate >= '".$condition['srecivedate']." 00:00:00'", NULL, FALSE);
+    if(isset($condition['erecivedate'])) $this->db->where("recivedate <= '".$condition['erecivedate']." 23:59:59'", NULL, FALSE);
     if(isset($condition['stype']) && isset($condition['skeyword'])) {
         $stype = $condition['stype'];
         $skeyword = $condition['skeyword'];
@@ -172,5 +172,15 @@ class Goodsmove_model extends CI_Model
                ";
         return $this->db->query($qry)->row();
 
+    }
+
+    function getAllList()
+    {
+        $this->db->select('*', FALSE);
+        $this->db->from('tb_goodsmove');
+        $this->db->order_by('shipdate', 'ASC');
+        $result = $this->db->get()->result();
+
+        return $result;
     }
 }
