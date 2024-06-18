@@ -2,7 +2,7 @@
 <html lang='ko'>
 <head>
    <?php include $_SERVER['DOCUMENT_ROOT'].'/admn/application/views/comm/head.php'; ?>
-   <link rel="stylesheet" href="/admn/css/productmvdate.css">
+   <link rel="stylesheet" href="/admn/css/productmvdate.css?v=1">
    <script src="/admn/js/productmvdate.js?<?=time()?>"></script>
    <script>
    var qs = "<?=$param?>";
