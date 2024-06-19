@@ -1,5 +1,5 @@
 /*list*/
-.content_list{margin-left:30px;min-width:1200px;width:90%}
+.content_list{margin-left:30px;min-width:1600px;width:90%}
 .content_list .content_top{position:relative;height:68px;min-width:1500px}
 .content_list .content_top > div{text-align:right}
 .content_list .content_top .startdate_wrap input,
@@ -84,7 +84,10 @@ input[name=reference_etc_txt]{position:relative;top:-4px;margin-left:5px;width:3
 
 .calendar_wrap{display:flex}
 .calendar_wrap > div:nth-child(1){width:800px;padding-top:20px;margin-right:20px}
-.calendar_wrap > div:nth-child(2){flex-grow:1}
+.calendar_wrap > div:nth-child(2){width:800px;}
 
 .fc-scroller { overflow: hidden !important; }
 #tooltip { position: absolute; display: none; padding: 10px; background: rgba(249, 249, 249, 1); border: 1px solid #d1d1d1; border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); pointer-events: none; z-index: 1000; }
+.fc-daygrid-day, .fc-event {
+    cursor: pointer;
+}

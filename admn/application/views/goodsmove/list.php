@@ -2,7 +2,7 @@
 <html lang='ko'>
 <head>
    <?php include $_SERVER['DOCUMENT_ROOT'].'/admn/application/views/comm/head.php'; ?>
-   <link rel="stylesheet" href="/admn/css/productmvdate.css?v=1">
+   <link rel="stylesheet" href="/admn/css/productmvdate.css?v=2">
    <script src="/admn/js/productmvdate.js?<?=time()?>"></script>
    <script>
    var qs = "<?=$param?>";
@@ -222,9 +222,13 @@
                 };
             });
 
+            var savedMonth = getCookie('calendarMonth');
+            var initialDate = savedMonth ? new Date(savedMonth + '-01') : new Date();
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 locale: 'ko',
                 initialView: 'dayGridMonth',
+                initialDate: initialDate,
                 events: groupedEvents,
                 eventMouseEnter: function(info) {
                     tooltip.innerHTML = info.event.extendedProps.description;
@@ -234,10 +238,35 @@
                 },
                 eventMouseLeave: function(info) {
                     tooltip.style.display = 'none';
+                },
+                dateClick: function(info) {
+                    var date = info.dateStr;
+                    var url = '/admn/productmove?sstype=&sbrand=&skind=&smoveyn=&sshipdate='+date+'&eshipdate='+date+'&srecivedate=&erecivedate=&stype=pcode&skeyword='; // 원하는 URL로 변경
+                    window.location.href = url;
+                },
+                eventClick: function(info) {
+                    var date = info.event.startStr;
+                    var url = '/admn/productmove?sstype=&sbrand=&skind=&smoveyn=&sshipdate='+date+'&eshipdate='+date+'&srecivedate=&erecivedate=&stype=pcode&skeyword='; // 원하는 URL로 변경
+                    window.location.href = url;
                 }
             });
 
             calendar.render();
+
+            document.querySelector('.fc-prev-button').addEventListener('click', updateCookie);
+            document.querySelector('.fc-next-button').addEventListener('click', updateCookie);
+            document.querySelector('.fc-today-button').addEventListener('click', updateCookie);
+
+            function updateCookie() {
+                var view = calendar.view;
+                var year = view.currentStart.getFullYear();
+                var month = view.currentStart.getMonth() + 1; // getMonth()는 0부터 시작하므로 +1 필요
+                if (month < 10) {
+                    month = '0' + month; // 월이 한자리 수일 때 0을 추가
+                }
+                var yearMonth = year + '-' + month;
+                setCookie('calendarMonth', yearMonth, 30);
+            }
 
             document.addEventListener('mousemove', function(e) {
                 if (tooltip.style.display === 'block') {
