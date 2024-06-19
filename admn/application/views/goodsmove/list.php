@@ -195,11 +195,18 @@
     <script>
         $(document).ready(function(){
 
+            var colorMap = {
+                '강남본점': '#e09c48',
+                '강동점': '#2528c3',
+                '잠실점': '#884c4c',
+                '부천점': '#009000'
+            };
+
             var calendarEl = document.getElementById('calendar');
             var tooltip = document.getElementById('tooltip');
             var events = [
                 <?php foreach($alllist as $item){ ?>
-                { title: '<?=$item->shipplace?> -> <?=$item->reciveplace?>', start: '<?=date('Y-m-d', strtotime($item->shipdate))?>', description: '<?=$item->shipplace?> -> <?=$item->reciveplace?>' },
+                { title: '<?=$item->shipplace?> -> <?=$item->reciveplace?>', start: '<?=date('Y-m-d', strtotime($item->shipdate))?>', description: '<span style="color:' + colorMap['<?=$item->shipplace?>'] + '"><?=$item->shipplace?></span> -> <span style="color:' + colorMap['<?=$item->reciveplace?>'] + '"><?=$item->reciveplace?></span>' },
                 <?php } ?>
             ];
 
