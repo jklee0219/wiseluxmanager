@@ -35,7 +35,7 @@
     				</tr>
     				<tr>
 
-    					<th>결제금액1</th>
+    					<th>결제금액</th>
     					<?php foreach($totSelltype as $v){ ?>
     					<td><?=number_format($v->total_paymentprice)?></td>
     					<?php }?>
