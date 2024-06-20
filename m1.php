@@ -8,7 +8,7 @@ mysqli_set_charset($dbconn, 'utf8');
 
 $qry = "  select seq, pcode from tb_refund where paymentprice is null ";
 $list = getQueryResult($qry);
-
+//test
 foreach($list as $v){
     $seq = $v['seq'];
     $pcode = $v['pcode'];
