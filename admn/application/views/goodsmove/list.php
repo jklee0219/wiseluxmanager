@@ -99,8 +99,6 @@
                             <option value="seller" <?=($stype=='seller') ? "selected='selected'" : ""?>>판매자</option>
                             <option value="sellerphone" <?=($stype=='sellerphone') ? "selected='selected'" : ""?>>판매자연락처</option>
                   			<option value="modelname" <?=($stype=='modelname') ? "selected='selected'" : ""?>>모델명</option>
-                            <option value="tb_productmovedate.shipplace" <?=($stype=='tb_productmovedate.shipplace') ? "selected='selected'" : ""?>>발송지점</option>
-                            <option value="tb_productmovedate.reciveplace" <?=($stype=='tb_productmovedate.reciveplace') ? "selected='selected'" : ""?>>수령지점</option>
 							<option value="tb_purchase.note" <?=($stype=='tb_purchase.note') ? "selected='selected'" : ""?>>비고</option>
 						</select>
 						<input type="text" class="form-control input-sm" autocomplete="off" name="skeyword" value="<?=$skeyword?>" placeholder="키워드 검색">
