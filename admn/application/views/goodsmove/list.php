@@ -2,7 +2,7 @@
 <html lang='ko'>
 <head>
    <?php include $_SERVER['DOCUMENT_ROOT'].'/admn/application/views/comm/head.php'; ?>
-   <link rel="stylesheet" href="/admn/css/productmvdate.css?v=2">
+   <link rel="stylesheet" href="/admn/css/productmvdate.css?v=3">
    <script src="/admn/js/productmvdate.js?<?=time()?>"></script>
    <script>
    var qs = "<?=$param?>";
@@ -37,6 +37,18 @@
             		</div>
                		<form name="searchFrm" action="/admn/productmove" method="get">
                         <div style="margin-bottom:6px">
+                            <select class="form-control input-sm" name="sshipplace">
+                                <option value="">발송지점</option>
+                                <?php foreach($goods_place as $v){ ?>
+                                <option value="<?=$v?>" <?=($sshipplace==$v) ? "selected='selected'" : ""?>><?=$v?></option>    
+                                <?php } ?>
+                            </select>
+                            <select class="form-control input-sm" name="sreciveplace">
+                                <option value="">수령지점</option>
+                                <?php foreach($goods_place as $v){ ?>
+                                <option value="<?=$v?>" <?=($sreciveplace==$v) ? "selected='selected'" : ""?>><?=$v?></option>    
+                                <?php } ?>
+                            </select>
                             <select class="form-control input-sm" name="sstype">
                                 <option value="">구분(전체)</option>
                                 <?php foreach($purchase_type as $v){ ?>
@@ -57,8 +69,8 @@
                             </select>
                             <select class="form-control input-sm" name="smoveyn">
                                 <option value="">이동결과(전체)</option>
-                                <?php foreach($goodsmove_yn as $v){ ?>
-                                <option value="<?=$v?>" <?=($smoveyn==$v) ? "selected='selected'" : ""?>><?=$v?></option>
+                                <?php foreach($goodsmove_yn as $k => $v){ ?>
+                                <option value="<?=$k?>" <?=($smoveyn==$k) ? "selected='selected'" : ""?>><?=$v?></option>
                                 <?php } ?>
                             </select>
                         </div>

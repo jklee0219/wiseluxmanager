@@ -41,6 +41,8 @@ class Productmove extends CI_Controller
         $srecivedate   = $this->input->get('srecivedate', TRUE);
         $erecivedate   = $this->input->get('erecivedate', TRUE);
         $skeyword      = $this->input->get('skeyword', TRUE);
+        $sshipplace    = $this->input->get('sshipplace', TRUE);
+        $sreciveplace   = $this->input->get('sreciveplace', TRUE);
         $scale         = 20;
         
         if($sstype) $condition['sstype'] = $sstype;
@@ -53,6 +55,8 @@ class Productmove extends CI_Controller
         if($erecivedate) $condition['erecivedate'] = $erecivedate;
         if($stype) $condition['stype'] = $stype;
         if($skeyword) $condition['skeyword'] = $skeyword;
+        if($sshipplace) $condition['sshipplace'] = $sshipplace;
+        if($sreciveplace) $condition['sreciveplace'] = $sreciveplace;
         
         $board_cnt = $this->Goodsmove_model->getListCnt($condition);
         
@@ -68,7 +72,7 @@ class Productmove extends CI_Controller
         $last_page   = $total_block <= $block ? $total_page : $block * 15;
         $go_page     = $first_page + 1;
         
-        $param2 = "&sstype=".$sstype."&stype=".$stype."&sbrand=".$sbrand."&skind=".$skind."&smoveyn=".$smoveyn."&sshipdate=".$sshipdate."&eshipdate=".$eshipdate."&srecivedate=".$srecivedate."&erecivedate=".$erecivedate."&skeyword=".$skeyword;
+        $param2 = "&sstype=".$sstype."&stype=".$stype."&sbrand=".$sbrand."&skind=".$skind."&smoveyn=".$smoveyn."&sshipdate=".$sshipdate."&eshipdate=".$eshipdate."&srecivedate=".$srecivedate."&erecivedate=".$erecivedate."&skeyword=".$skeyword."&sshipplace=".$sshipplace."&sreciveplace=".$sreciveplace;
         $param = "page=".$page.$param2;
         
         $brand_list = $this->Brand_model->getList();
@@ -127,7 +131,10 @@ class Productmove extends CI_Controller
             "param" => $param,
             "movenCnt" => $movenCnt,
             "moveyCnt" => $moveyCnt,
-            'alllist' => $alllist
+            'alllist' => $alllist,
+            'sshipplace' => $sshipplace,
+            'sreciveplace' => $sreciveplace,
+            "goods_place" => $this->config->item('goods_place'),
         );
         
         $this->load->view('goodsmove/list', $data);
@@ -147,8 +154,10 @@ class Productmove extends CI_Controller
         $srecivedate   = $this->input->get('srecivedate', TRUE);
         $erecivedate   = $this->input->get('erecivedate', TRUE);
         $skeyword      = $this->input->get('skeyword', TRUE);
+        $sshipplace    = $this->input->get('sshipplace', TRUE);
+        $sreciveplace   = $this->input->get('sreciveplace', TRUE);
         
-        $param2 = "&sstype=".$sstype."&stype=".$stype."&sbrand=".$sbrand."&skind=".$skind."&smoveyn=".$smoveyn."&sshipdate=".$sshipdate."&eshipdate=".$eshipdate."&srecivedate=".$srecivedate."&erecivedate=".$erecivedate."&skeyword=".$skeyword;
+        $param2 = "&sstype=".$sstype."&stype=".$stype."&sbrand=".$sbrand."&skind=".$skind."&smoveyn=".$smoveyn."&sshipdate=".$sshipdate."&eshipdate=".$eshipdate."&srecivedate=".$srecivedate."&erecivedate=".$erecivedate."&skeyword=".$skeyword."&sshipplace=".$sshipplace."&sreciveplace=".$sreciveplace;
         $param = "page=".$page.$param2;
         
         $seq = $this->input->get('seq', TRUE);
@@ -170,8 +179,10 @@ class Productmove extends CI_Controller
         $srecivedate   = $this->input->get('srecivedate', TRUE);
         $erecivedate   = $this->input->get('erecivedate', TRUE);
         $skeyword      = $this->input->get('skeyword', TRUE);
+        $sshipplace    = $this->input->get('sshipplace', TRUE);
+        $sreciveplace   = $this->input->get('sreciveplace', TRUE);
         
-        $param2 = "&sstype=".$sstype."&stype=".$stype."&sbrand=".$sbrand."&skind=".$skind."&smoveyn=".$smoveyn."&sshipdate=".$sshipdate."&eshipdate=".$eshipdate."&srecivedate=".$srecivedate."&erecivedate=".$erecivedate."&skeyword=".$skeyword;
+        $param2 = "&sstype=".$sstype."&stype=".$stype."&sbrand=".$sbrand."&skind=".$skind."&smoveyn=".$smoveyn."&sshipdate=".$sshipdate."&eshipdate=".$eshipdate."&srecivedate=".$srecivedate."&erecivedate=".$erecivedate."&skeyword=".$skeyword."&sshipplace=".$sshipplace."&sreciveplace=".$sreciveplace;
         $param = "page=".$page.$param2;
         
         $manager_list = $this->Manager_model->getList(); //담당자
@@ -198,8 +209,10 @@ class Productmove extends CI_Controller
         $srecivedate   = $this->input->get('srecivedate', TRUE);
         $erecivedate   = $this->input->get('erecivedate', TRUE);
         $skeyword      = $this->input->get('skeyword', TRUE);
+        $sshipplace    = $this->input->get('sshipplace', TRUE);
+        $sreciveplace   = $this->input->get('sreciveplace', TRUE);
         
-        $param2 = "&sstype=".$sstype."&stype=".$stype."&sbrand=".$sbrand."&skind=".$skind."&smoveyn=".$smoveyn."&sshipdate=".$sshipdate."&eshipdate=".$eshipdate."&srecivedate=".$srecivedate."&erecivedate=".$erecivedate."&skeyword=".$skeyword;
+        $param2 = "&sstype=".$sstype."&stype=".$stype."&sbrand=".$sbrand."&skind=".$skind."&smoveyn=".$smoveyn."&sshipdate=".$sshipdate."&eshipdate=".$eshipdate."&srecivedate=".$srecivedate."&erecivedate=".$erecivedate."&skeyword=".$skeyword."&sshipplace=".$sshipplace."&sreciveplace=".$sreciveplace;
         $param = "page=".$page.$param2;
         
         $purchase_seq = trim($this->input->post('purchase_seq', TRUE));
@@ -245,8 +258,10 @@ class Productmove extends CI_Controller
         $srecivedate   = $this->input->get('srecivedate', TRUE);
         $erecivedate   = $this->input->get('erecivedate', TRUE);
         $skeyword      = $this->input->get('skeyword', TRUE);
+        $sshipplace    = $this->input->get('sshipplace', TRUE);
+        $sreciveplace   = $this->input->get('sreciveplace', TRUE);
         
-        $param2 = "&sstype=".$sstype."&stype=".$stype."&sbrand=".$sbrand."&skind=".$skind."&smoveyn=".$smoveyn."&sshipdate=".$sshipdate."&eshipdate=".$eshipdate."&srecivedate=".$srecivedate."&erecivedate=".$erecivedate."&skeyword=".$skeyword;
+        $param2 = "&sstype=".$sstype."&stype=".$stype."&sbrand=".$sbrand."&skind=".$skind."&smoveyn=".$smoveyn."&sshipdate=".$sshipdate."&eshipdate=".$eshipdate."&srecivedate=".$srecivedate."&erecivedate=".$erecivedate."&skeyword=".$skeyword."&sshipplace=".$sshipplace."&sreciveplace=".$sreciveplace;
         $param = "page=".$page.$param2;
 
         $manager_list = $this->Manager_model->getList(); //담당자
@@ -281,8 +296,10 @@ class Productmove extends CI_Controller
         $srecivedate   = $this->input->get('srecivedate', TRUE);
         $erecivedate   = $this->input->get('erecivedate', TRUE);
         $skeyword      = $this->input->get('skeyword', TRUE);
+        $sshipplace    = $this->input->get('sshipplace', TRUE);
+        $sreciveplace   = $this->input->get('sreciveplace', TRUE);
         
-        $param2 = "&sstype=".$sstype."&stype=".$stype."&sbrand=".$sbrand."&skind=".$skind."&smoveyn=".$smoveyn."&sshipdate=".$sshipdate."&eshipdate=".$eshipdate."&srecivedate=".$srecivedate."&erecivedate=".$erecivedate."&skeyword=".$skeyword;
+        $param2 = "&sstype=".$sstype."&stype=".$stype."&sbrand=".$sbrand."&skind=".$skind."&smoveyn=".$smoveyn."&sshipdate=".$sshipdate."&eshipdate=".$eshipdate."&srecivedate=".$srecivedate."&erecivedate=".$erecivedate."&skeyword=".$skeyword."&sshipplace=".$sshipplace."&sreciveplace=".$sreciveplace;
         $param = "page=".$page.$param2;
         
         $seq  = $this->input->post('seq', TRUE);
@@ -335,6 +352,8 @@ class Productmove extends CI_Controller
         $srecivedate   = $this->input->get('srecivedate', TRUE);
         $erecivedate   = $this->input->get('erecivedate', TRUE);
         $skeyword      = $this->input->get('skeyword', TRUE);
+        $sshipplace    = $this->input->get('sshipplace', TRUE);
+        $sreciveplace   = $this->input->get('sreciveplace', TRUE);
         
         if($sstype) $condition['sstype'] = $sstype;
         if($sbrand) $condition['sbrand'] = $sbrand;
@@ -346,6 +365,8 @@ class Productmove extends CI_Controller
         if($erecivedate) $condition['erecivedate'] = $erecivedate;
         if($stype) $condition['stype'] = $stype;
         if($skeyword) $condition['skeyword'] = $skeyword;
+        if($sshipplace) $condition['sshipplace'] = $sshipplace;
+        if($sreciveplace) $condition['sreciveplace'] = $sreciveplace;
         
         $board_list = $this->Goodsmove_model->getList($condition);
         

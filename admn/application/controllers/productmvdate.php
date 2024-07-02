@@ -35,6 +35,8 @@ class Productmvdate extends CI_Controller
         $ssdate        = $this->input->get('ssdate', TRUE);
         $sedate        = $this->input->get('sedate', TRUE);
         $skeyword      = $this->input->get('skeyword', TRUE);
+        $sshipplace    = $this->input->get('sshipplace', TRUE);
+        $sreciveplace   = $this->input->get('sreciveplace', TRUE);
         $scale         = 20;
         
         if($stype) $condition['stype'] = $stype;
@@ -53,7 +55,7 @@ class Productmvdate extends CI_Controller
         $last_page   = $total_block <= $block ? $total_page : $block * 15;
         $go_page     = $first_page + 1;
         
-        $param2 = "&stype=".$stype."&ssdate=".$ssdate."&sedate=".$sedate."&skeyword=".$skeyword;
+        $param2 = "&stype=".$stype."&ssdate=".$ssdate."&sedate=".$sedate."&skeyword=".$skeyword."&sshipplace=".$sshipplace."&sreciveplace=".$sreciveplace;
         $param = "page=".$page.$param2;
 
         $board_list = $this->Productmovedate_model->getList($condition,$scale,$first);
@@ -98,7 +100,10 @@ class Productmvdate extends CI_Controller
             "board_list" => $board_list,
             "paging_html" => $paging_html,
             'param' => $param,
-            'alllist' => $alllist
+            'alllist' => $alllist,
+            'sshipplace' => $sshipplace,
+            'sreciveplace' => $sreciveplace,
+            "goods_place" => $this->config->item('goods_place'),
         );
         
         $this->load->view('productmvdate/list', $data);

@@ -29,6 +29,9 @@ class Goodsmove_model extends CI_Model
     if(isset($condition['eshipdate'])) $this->db->where("shipdate <= '".$condition['eshipdate']." 23:59:59'", NULL, FALSE);
     if(isset($condition['srecivedate'])) $this->db->where("recivedate >= '".$condition['srecivedate']." 00:00:00'", NULL, FALSE);
     if(isset($condition['erecivedate'])) $this->db->where("recivedate <= '".$condition['erecivedate']." 23:59:59'", NULL, FALSE);
+    if(isset($condition['sshipplace'])) $this->db->where("shipplace", $condition['sshipplace']);
+    if(isset($condition['sreciveplace'])) $this->db->where("reciveplace", $condition['sreciveplace']);
+    if(isset($condition['smoveyn'])) $this->db->where("moveyn", $condition['smoveyn']);
   	if(isset($condition['stype']) && isset($condition['skeyword'])) {
   		$stype = $condition['stype'];
   		$skeyword = $condition['skeyword'];
@@ -64,6 +67,9 @@ class Goodsmove_model extends CI_Model
     if(isset($condition['eshipdate'])) $this->db->where("shipdate <= '".$condition['eshipdate']." 23:59:59'", NULL, FALSE);
     if(isset($condition['srecivedate'])) $this->db->where("recivedate >= '".$condition['srecivedate']." 00:00:00'", NULL, FALSE);
     if(isset($condition['erecivedate'])) $this->db->where("recivedate <= '".$condition['erecivedate']." 23:59:59'", NULL, FALSE);
+    if(isset($condition['sshipplace'])) $this->db->where("shipplace", $condition['sshipplace']);
+    if(isset($condition['sreciveplace'])) $this->db->where("reciveplace", $condition['sreciveplace']);
+    if(isset($condition['smoveyn'])) $this->db->where("moveyn", $condition['smoveyn']);
     if(isset($condition['stype']) && isset($condition['skeyword'])) {
         $stype = $condition['stype'];
         $skeyword = $condition['skeyword'];

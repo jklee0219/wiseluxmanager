@@ -10,6 +10,8 @@
 .content_list .content_top > div select[name='stype']{width:120px;display:inline-block}
 .content_list .content_top > div select[name='smoveyn']{width:120px;display:inline-block}
 .content_list .content_top > div input[name="skeyword"]{width:180px;display:inline-block}
+.content_list .content_top > div select[name="sreciveplace"]{width:120px;display:inline-block}
+.content_list .content_top > div select[name="sshipplace"]{width:120px;display:inline-block}
 .content_list .content_top > div .gap{margin:10px 0}
 .content_list .content_top > div .line{border-top:1px solid #222222;margin:10px 0}
 .content_list .table{margin-top:20px;font-size:13px;width:100%}

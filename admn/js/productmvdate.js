@@ -30,4 +30,8 @@ $(document).ready(function(){
 			searchFrm.submit();
 		}
 	});
+	
+	$('#excel_btn').click(function(){
+		$('iframe[name="hiddenFrm"]').attr('src','/admn/productmove/excel?'+qs);
+	});
 });
