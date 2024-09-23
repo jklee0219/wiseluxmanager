@@ -140,15 +140,9 @@
                		</div>
             	</div>
             	<div class="form-group">
-               		<label class="col-sm-3 control-label" for="result">AS신청결과</label>
-               		<div class="col-sm-9 pt2">
-                  		<textarea class='form-control input-sm' autocomplete="off" style="height:200px" name="result" id="result"></textarea>
-               		</div>
-            	</div>
-            	<div class="form-group">
                		<label class="col-sm-3 control-label" for="note">비고</label>
                		<div class="col-sm-9 pt2">
-                  		<textarea class='form-control input-sm' disabled="disabled" autocomplete="off" style="height:100px" name="purchase_note" id="purchase_note"></textarea>
+                  		<textarea class='form-control input-sm' disabled="disabled" autocomplete="off" style="height:200px" name="purchase_note" id="purchase_note"></textarea>
                		</div>
             	</div>
          	</form>
