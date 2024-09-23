@@ -332,9 +332,9 @@
 	               	</div>
             	</div>
             	<div class="form-group">
-               		<div class="fwb col-sm-2 control-label" for="asmemo">AS메모</div>
+               		<div class="fwb col-sm-2 control-label" for="asmemo">AS신청사유</div>
                		<div class="col-sm-9 pt2">
-                  		<textarea class='form-control input-sm' autocomplete="off" style="height:100px" name=asmemo id='asmemo'><?=$view->asmemo?></textarea>
+                  		<textarea class='form-control input-sm' autocomplete="off" style="height:200px" name="reason" id='reason'><?=$view->reason?></textarea>
                		</div>
             	</div>
             	<div class="form-group">

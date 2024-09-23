@@ -22,6 +22,7 @@ class Goods extends CI_Controller
         $this->load->model('Brand_model');
         $this->load->model('Purchase_model');
         $this->load->model('Cafe24api_model');
+        $this->load->model('Asinfo_model');
         
         //접속체크
         $this->load->model('Access_model');
@@ -254,6 +255,7 @@ class Goods extends CI_Controller
         $asmemo = $this->input->post('asmemo', TRUE);
         $note = $this->input->post('note', TRUE);
         $floor = $this->input->post('floor', TRUE);
+        $reason  = $this->input->post('reason', TRUE);
         
         //카페24정보추가
         $c24_display = $this->input->post('c24_display', TRUE); //진열상태
@@ -396,6 +398,9 @@ class Goods extends CI_Controller
             //매입목록에서 온라인체크로 자동등록되는 경우 price값을 가져오도록 처리..
             $purchase_data = $this->Purchase_model->getView($purchase_seq);
             $price = empty($purchase_data->goods_price) ? 0 : $purchase_data->goods_price;
+
+            //AS신청사유 수정
+            $this->Asinfo_model->updateReason($purchase_seq, $reason);
 
         }
         
@@ -553,6 +558,7 @@ class Goods extends CI_Controller
         $stock = $this->input->post('stock', TRUE);
         $represent = $this->input->post('represent', TRUE);
         $floor = $this->input->post('floor', TRUE);       
+        $reason  = $this->input->post('reason', TRUE);
         
         //카페24정보추가
         $c24_product_no = $this->input->post('c24_product_no', TRUE); //카페24고유값
@@ -690,6 +696,9 @@ class Goods extends CI_Controller
                 $data['exprice'] = $purchase_exprice;
             }
             $this->Purchase_model->updateList($data, $purchase_seq);
+
+            //AS신청사유 수정
+            $this->Asinfo_model->updateReason($purchase_seq, $reason);
         }
         
         //brand_seq값이 있는 경우 매입쪽도 같이 연동이 되어야 함

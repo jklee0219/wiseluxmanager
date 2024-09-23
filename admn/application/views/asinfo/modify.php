@@ -137,7 +137,7 @@
             	<div class="form-group">
                		<label class="col-sm-3 control-label" for="reason">AS신청사유</label>
                		<div class="col-sm-9 pt2">
-                  		<textarea class='form-control input-sm' autocomplete="off" style="height:100px" name="reason" id="reason"><?=$view->reason?></textarea>
+                  		<textarea class='form-control input-sm' autocomplete="off" style="height:200px" name="reason" id="reason"><?=$view->reason?></textarea>
                		</div>
             	</div>
             	<div class="form-group">
@@ -150,7 +150,7 @@
             	<div class="form-group">
                		<label class="col-sm-3 control-label" for="result">AS신청결과</label>
                		<div class="col-sm-9 pt2">
-                  		<textarea class='form-control input-sm' autocomplete="off" style="height:100px" name="result" id="result"><?=$view->result?></textarea>
+                  		<textarea class='form-control input-sm' autocomplete="off" style="height:200px" name="result" id="result"><?=$view->result?></textarea>
                		</div>
             	</div>
             	<div class="form-group">

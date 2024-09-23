@@ -207,6 +207,13 @@ class Asinfo_model extends CI_Model
        $result = $this->db->get()->row();
        return $result->cnt;
    }
+
+   function updateReason($purchase_seq, $reason)
+   {
+    $data = ['reason' => $reason];
+    $this->db->where('purchase_seq', $purchase_seq);
+    $this->db->update('tb_asinfo', $data);
+   }
    
    function getTotPprise($condition,$asyn)
    {
