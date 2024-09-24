@@ -423,7 +423,7 @@ class Purchase extends CI_Controller
 					$.ajax({
 						type: 'POST',
 				        url:'/admn/asinfo/writeproc',
-				        data: 'purchase_seq=".$purchase_seq."'
+				        data: 'purchase_seq=".$purchase_seq."&reason=".$reason."'
 				    })
 				</script>";
 		}
@@ -436,7 +436,7 @@ class Purchase extends CI_Controller
 					$.ajax({
 						type: 'POST',
 				      url:'/admn/goods/writeproc',
-				      data: 'purchase_seq=".$purchase_seq."'
+				      data: 'purchase_seq=".$purchase_seq."&reason=".$reason."'
 				   })
 				</script>";
 		}
@@ -638,7 +638,7 @@ class Purchase extends CI_Controller
 					$.ajax({
 						type: 'POST',
 				        url:'/admn/asinfo/writeproc',
-				        data: 'purchase_seq=".$seq."'
+				        data: 'purchase_seq=".$seq."&reason=".$reason."'
 				    })
 				</script>";
 		}
@@ -651,7 +651,7 @@ class Purchase extends CI_Controller
 					$.ajax({
 						type: 'POST',
 				        url:'/admn/goods/writeproc',
-				        data: 'purchase_seq=".$seq."'
+				        data: 'purchase_seq=".$seq."&reason=".$reason."'
 				    })
 				</script>";
 		}
