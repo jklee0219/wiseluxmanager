@@ -442,6 +442,8 @@ function getPurchaseInfoFromCode(){
                     }
                     $('#purchase_exprice').attr('disabled', false);
 
+					$('#reason').val(res.data.reason);
+
                     if(res.data.goods_price) $('#price').val($.number(res.data.goods_price));
 
 	        		getPriceGuide($('#price').val()); //ajax 문제로 한번더 처리

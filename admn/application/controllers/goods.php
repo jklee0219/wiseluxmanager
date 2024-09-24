@@ -400,7 +400,7 @@ class Goods extends CI_Controller
             $price = empty($purchase_data->goods_price) ? 0 : $purchase_data->goods_price;
 
             //AS신청사유 수정
-            $this->Asinfo_model->updateReason($purchase_seq, $reason);
+            $this->Purchase_model->updateReason($purchase_seq, $reason);
 
         }
         
@@ -698,7 +698,7 @@ class Goods extends CI_Controller
             $this->Purchase_model->updateList($data, $purchase_seq);
 
             //AS신청사유 수정
-            $this->Asinfo_model->updateReason($purchase_seq, $reason);
+            $this->Purchase_model->updateReason($purchase_seq, $reason);
         }
         
         //brand_seq값이 있는 경우 매입쪽도 같이 연동이 되어야 함

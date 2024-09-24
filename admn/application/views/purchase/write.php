@@ -160,6 +160,12 @@
                         <label><input type='checkbox' class='form-control input-sm' name='astype_etc_chk' value="기타"><p class="checkboxtxt">기타</p><input type="text" disabled="disabled" name="astype_etc_txt" class='form-control input-sm'></label>
 	               	</div>
             	</div>
+            	<div class="form-group">
+					<label class="col-sm-3 control-label" for="reason">AS신청사유</label>
+               		<div class="col-sm-9 pt2">
+                  		<textarea class='form-control input-sm' autocomplete="off" style="height:200px" name="reason" id='reason'></textarea>
+               		</div>
+            	</div>
             	<div class="form-group cus">
 					<label class="col-sm-3 control-label" for='note'>참고사항</label>
 					<div class="col-sm-9 pt2">

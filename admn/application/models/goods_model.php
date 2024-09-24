@@ -157,7 +157,7 @@ class Goods_model extends CI_Model
       		(select seq from tb_goods_img where tb_goods_img.goods_seq = tb_goods.seq and represent = 'Y' limit 1) as represent,
             (select asprice from tb_purchase where tb_purchase.seq = tb_goods.purchase_seq) as purchase_asprice,
             (select `type` from tb_purchase where tb_purchase.seq = tb_goods.purchase_seq) as purchase_type,
-      (select reason from tb_asinfo where tb_asinfo.purchase_seq = tb_goods.purchase_seq) as reason
+      (select reason from tb_purchase where tb_purchase.seq = tb_goods.purchase_seq) as reason
 	  ";
 	  $this->db->select($selectcolumn, FALSE);
       $this->db->from('tb_goods');

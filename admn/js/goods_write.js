@@ -299,6 +299,8 @@ function getPurchaseInfoFromCode(){
                     }
                     $('#purchase_exprice').attr('disabled', false);
 
+					$('#reason').val(res.data.reason);
+
 	        	}else if(res.result == 'already'){
 	        		if(confirm('이미 등록된 상품데이터가 존재 합니다.\n이동하시겠습니까?')){
 	        			location.href = '/admn/goods/modify?seq='+res.data;

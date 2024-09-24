@@ -344,11 +344,12 @@ class Purchase extends CI_Controller
 		$goods_price = $this->input->post('goods_price', TRUE);
 		$goods_price = str_replace(',', '', $goods_price);
 		$goods_price = $goods_price == '' ? 0 : $goods_price;
-      $goods_stock = $this->input->post('goods_stock', TRUE);
-      $goods_stock = !empty($goods_stock) ? $goods_stock : 'Y';
+      	$goods_stock = $this->input->post('goods_stock', TRUE);
+      	$goods_stock = !empty($goods_stock) ? $goods_stock : 'Y';
         $exprice = $this->input->post('exprice', TRUE);
         $exprice = str_replace(',', '', $exprice);
         if(empty($exprice)) $exprice = 0;
+		$reason = $this->input->post('reason', TRUE);
 
         //astype 기타 
         $astype_etc_chk = $this->input->post('astype_etc_chk', TRUE);
@@ -407,7 +408,8 @@ class Purchase extends CI_Controller
 			'birth' => $birth,
 			'asprice' => $asprice,
 			'goods_price' => $goods_price,
-            'goods_stock' => $goods_stock
+            'goods_stock' => $goods_stock,
+			'reason' => $reason
 		);
 
 		$this->Purchase_model->insertList($data);
@@ -555,6 +557,7 @@ class Purchase extends CI_Controller
         $exprice = $this->input->post('exprice', TRUE);
         $exprice = str_replace(',', '', $exprice);
         if(empty($exprice)) $exprice = 0;
+		$reason = $this->input->post('reason', TRUE);
 
         //astype 기타 
         $astype_etc_chk = $this->input->post('astype_etc_chk', TRUE);
@@ -608,7 +611,8 @@ class Purchase extends CI_Controller
 			'place' => $place,
 			'birth' => $birth,
 			'asprice' => $asprice,
-			'goods_price' => $goods_price
+			'goods_price' => $goods_price,
+			'reason' => $reason
 		);
 
       if(!empty($goods_stock)){

@@ -105,6 +105,7 @@ function getPurchaseInfoFromCode(){
 	        				$(this).prop('checked', true);
 	        			}
 	        		});
+					$('#reason').val(res.data.reason);
 
 	        		$('#purchase_note').val(res.data.note).attr('disabled', false);
 	        		

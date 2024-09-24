@@ -198,7 +198,7 @@ class Purchase_model extends CI_Model
    function getInfoFromCode4($pcode)
    {
     //tb_goods 조인
-    $this->db->select('tb_purchase.astype as astype, tb_purchase.modelname as modelname, tb_purchase.seq as seq, (select concat(`filepath`,`realfilename`) as thumb from tb_goods_img where tb_goods.seq = tb_goods_img.goods_seq order by represent limit 1) as thumb, tb_purchase.pdate as pdate, tb_purchase.pdate as pdate, seller, sellerphone, tb_purchase.reference, tb_purchase.guarantee, tb_purchase.note, (select buyer from tb_trade where tb_trade.purchase_seq = tb_purchase.seq) as trade_buyer,buyerphone', false);
+    $this->db->select('reason, tb_purchase.astype as astype, tb_purchase.modelname as modelname, tb_purchase.seq as seq, (select concat(`filepath`,`realfilename`) as thumb from tb_goods_img where tb_goods.seq = tb_goods_img.goods_seq order by represent limit 1) as thumb, tb_purchase.pdate as pdate, tb_purchase.pdate as pdate, seller, sellerphone, tb_purchase.reference, tb_purchase.guarantee, tb_purchase.note, (select buyer from tb_trade where tb_trade.purchase_seq = tb_purchase.seq) as trade_buyer,buyerphone', false);
     $this->db->from('tb_purchase');
     $this->db->join('tb_goods', 'tb_purchase.seq = tb_goods.purchase_seq and tb_goods.purchase_seq <> 0', 'left');
     $this->db->join('tb_trade', 'tb_purchase.seq = tb_trade.purchase_seq', 'left');
@@ -860,5 +860,12 @@ class Purchase_model extends CI_Model
        $this->db->where('onlineyn', 'N');
        $this->db->where(" (type = '교환' or type = '교환+매입') ", NULL, FALSE);
        return $this->db->get()->row();
+    }
+
+    function updateReason($purchase_seq, $reason)
+    {
+      $data = ['reason' => $reason];
+      $this->db->where('seq', $purchase_seq);
+      $this->db->update('tb_purchase', $data);
     }
 }

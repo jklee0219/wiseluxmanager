@@ -11,7 +11,7 @@
    <script src="/admn/js/jquery.number.min.js"></script>
    <script src="/admn/js/comma.js"></script>
    <script src="/lib/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
-   <script src="/admn/js/goods_modify.js?<?=time()?>"></script>
+   <script src="/admn/js/goods_modify.js?v=4"></script>
 </head>
 <body>
 

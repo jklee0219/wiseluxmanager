@@ -10,7 +10,7 @@
    </script>
    <script src="/admn/js/jquery.number.min.js"></script>
    <script src="/admn/js/comma.js"></script>
-   <script src="/admn/js/asinfo_modify.js?v=4"></script>
+   <script src="/admn/js/asinfo_modify.js?v=5"></script>
 </head>
 <body>
 

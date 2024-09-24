@@ -104,6 +104,8 @@ function getPurchaseInfoFromCode(){
                     });
                     $('input[name="astype_etc_chk"]').attr('disabled', false);
                     $('input[name="astype_etc_txt"]').attr('disabled', false);
+					
+					$('#reason').val(res.data.reason);
                     if((res.data.astype).indexOf('기타') > -1){
                         $('input[name="astype_etc_chk"]').prop('checked', true);
                     }

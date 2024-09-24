@@ -229,7 +229,8 @@ class Asinfo extends CI_Controller
                     'reference' => $reference,
                     'astype' => $astype,
                     'guarantee' => $guarantee,
-                    'note' => $purchase_note
+                    'note' => $purchase_note,
+                    'reason' => $reason
                 );
                 $this->Purchase_model->updateList($data, $purchase_seq);
             }
@@ -240,7 +241,6 @@ class Asinfo extends CI_Controller
         $data = array(
             'purchase_seq' => $purchase_seq,
             'start_date' => $start_date,
-            'reason' => $reason,
             'end_date' => $end_date,
             'result' => $result,
             // 'note' => $note,
@@ -357,7 +357,8 @@ class Asinfo extends CI_Controller
                     'reference' => $reference,
                     'astype' => $astype,
                     'guarantee' => $guarantee,
-                    'note' => $purchase_note
+                    'note' => $purchase_note,
+                    'reason' => $reason
                 );
                 $this->Purchase_model->updateList($data, $purchase_seq);
             }
@@ -366,7 +367,6 @@ class Asinfo extends CI_Controller
         $data = array(
             'purchase_seq' => $purchase_seq,
             'start_date' => $start_date,
-            'reason' => $reason,
             'end_date' => $end_date,
             'result' => $result,
             // 'note' => $note,
