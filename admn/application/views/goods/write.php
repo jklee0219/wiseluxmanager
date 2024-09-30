@@ -166,26 +166,26 @@
 						<label><input type="checkbox" value="6" name="c24_main[]"> <span class="t2">HOT상품</span></label>
 	               	</div>
             	</div>
+				<!-- 미사용 2024.2.28
             	<div class="form-group">
 					<div class="fwb col-sm-2 control-label" for="c24_summary_description">상품 요약설명</div>
 					<div class="col-sm-9 pt2">
 						<input type='text' class='form-control input-sm' autocomplete="off" name='c24_summary_description' id='c24_summary_description' maxlength="255">
 	               	</div>
             	</div>
-				<!-- 미사용 2024.2.28
             	<div class="form-group">
 					<div class="fwb col-sm-2 control-label" for="c24_simple_description">상품 간략설명</div>
 					<div class="col-sm-9 pt2">
 						<textarea class='form-control input-sm textarea' autocomplete="off" name="c24_simple_description" id="c24_simple_description"></textarea>
 	               	</div>
             	</div>
+				-->
             	<div class="form-group">
 					<div class="fwb col-sm-2 control-label" for="c24_description">상품 상세설명</div>
 					<div class="col-sm-9 pt2">
 						<textarea class='form-control input-sm textarea' autocomplete="off" name="c24_description" id="content_editor"></textarea>
 	               	</div>
             	</div>
-				-->
                 <?php if(in_array($this->session->userdata('ADM_AUTH'), array(2,3,9))){ ?>
                 <div class="form-group">
                     <div class="fwb col-sm-2 control-label">매입거래가격</div>
