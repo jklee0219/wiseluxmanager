@@ -340,6 +340,7 @@ class Purchase extends CI_Controller
 		if($reference) $reference = implode($reference, '|');
 		$asprice = $this->input->post('asprice', TRUE);
 		$asprice = str_replace(',', '', $asprice);
+		$asprice = trim($asprice);
 		$asprice = $asprice == '' ? 0 : $asprice;
 		$goods_price = $this->input->post('goods_price', TRUE);
 		$goods_price = str_replace(',', '', $goods_price);
