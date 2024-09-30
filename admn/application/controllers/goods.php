@@ -366,6 +366,7 @@ class Goods extends CI_Controller
 
             $purchase_asprice = $this->input->post('purchase_asprice', TRUE);
             $purchase_asprice = str_replace(',', '', $purchase_asprice);
+            $purchase_asprice = empty($purchase_asprice) ? 0 : $purchase_asprice;
             $purchase_type = $this->input->post('purchase_type', TRUE);
 
             if($purchase_kind || $purchase_modelname || $purchase_pdate || $purchase_pprice || $purchase_method || $purchase_class || $price){
@@ -670,6 +671,7 @@ class Goods extends CI_Controller
 
             $purchase_asprice = $this->input->post('purchase_asprice', TRUE);
             $purchase_asprice = str_replace(',', '', $purchase_asprice);
+            $purchase_asprice = empty($purchase_asprice) ? 0 : $purchase_asprice;
             $purchase_type = $this->input->post('purchase_type', TRUE); 
 
             $data = array(
