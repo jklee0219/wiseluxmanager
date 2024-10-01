@@ -351,6 +351,7 @@ class Purchase extends CI_Controller
         $exprice = str_replace(',', '', $exprice);
         if(empty($exprice)) $exprice = 0;
 		$reason = $this->input->post('reason', TRUE);
+		$reason = !empty($reason) ? $reason : '';
 
         //astype 기타 
         $astype_etc_chk = $this->input->post('astype_etc_chk', TRUE);
@@ -559,6 +560,7 @@ class Purchase extends CI_Controller
         $exprice = str_replace(',', '', $exprice);
         if(empty($exprice)) $exprice = 0;
 		$reason = $this->input->post('reason', TRUE);
+		$reason = !empty($reason) ? $reason : '';
 
         //astype 기타 
         $astype_etc_chk = $this->input->post('astype_etc_chk', TRUE);
