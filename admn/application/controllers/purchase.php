@@ -351,7 +351,6 @@ class Purchase extends CI_Controller
         $exprice = str_replace(',', '', $exprice);
         if(empty($exprice)) $exprice = 0;
 		$reason = $this->input->post('reason', TRUE);
-		$reason = !empty($reason) ? $reason : '';
 
         //astype 기타 
         $astype_etc_chk = $this->input->post('astype_etc_chk', TRUE);
@@ -425,7 +424,7 @@ class Purchase extends CI_Controller
 					$.ajax({
 						type: 'POST',
 				        url:'/admn/asinfo/writeproc',
-				        data: 'purchase_seq=".$purchase_seq."&reason=".$reason."'
+				        data: 'purchase_seq=".$purchase_seq."'
 				    })
 				</script>";
 		}
@@ -438,7 +437,7 @@ class Purchase extends CI_Controller
 					$.ajax({
 						type: 'POST',
 				      url:'/admn/goods/writeproc',
-				      data: 'purchase_seq=".$purchase_seq."&reason=".$reason."'
+				      data: 'purchase_seq=".$purchase_seq."'
 				   })
 				</script>";
 		}
@@ -560,7 +559,6 @@ class Purchase extends CI_Controller
         $exprice = str_replace(',', '', $exprice);
         if(empty($exprice)) $exprice = 0;
 		$reason = $this->input->post('reason', TRUE);
-		$reason = !empty($reason) ? $reason : '';
 
         //astype 기타 
         $astype_etc_chk = $this->input->post('astype_etc_chk', TRUE);
@@ -641,7 +639,7 @@ class Purchase extends CI_Controller
 					$.ajax({
 						type: 'POST',
 				        url:'/admn/asinfo/writeproc',
-				        data: 'purchase_seq=".$seq."&reason=".$reason."'
+				        data: 'purchase_seq=".$seq."'
 				    })
 				</script>";
 		}
@@ -654,7 +652,7 @@ class Purchase extends CI_Controller
 					$.ajax({
 						type: 'POST',
 				        url:'/admn/goods/writeproc',
-				        data: 'purchase_seq=".$seq."&reason=".$reason."'
+				        data: 'purchase_seq=".$seq."'
 				    })
 				</script>";
 		}
