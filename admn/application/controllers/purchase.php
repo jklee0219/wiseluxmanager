@@ -437,7 +437,7 @@ class Purchase extends CI_Controller
 					$.ajax({
 						type: 'POST',
 				      url:'/admn/goods/writeproc',
-				      data: 'purchase_seq=".$purchase_seq."'
+				      data: 'purchase_seq=".$purchase_seq."&copy=y'
 				   })
 				</script>";
 		}
@@ -652,7 +652,7 @@ class Purchase extends CI_Controller
 					$.ajax({
 						type: 'POST',
 				        url:'/admn/goods/writeproc',
-				        data: 'purchase_seq=".$seq."'
+				        data: 'purchase_seq=".$seq."&copy=y'
 				    })
 				</script>";
 		}

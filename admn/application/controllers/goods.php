@@ -256,6 +256,7 @@ class Goods extends CI_Controller
         $note = $this->input->post('note', TRUE);
         $floor = $this->input->post('floor', TRUE);
         $reason  = $this->input->post('reason', TRUE);
+        $copy = $this->input->post('copy', TRUE);
         
         //카페24정보추가
         $c24_display = $this->input->post('c24_display', TRUE); //진열상태
@@ -401,7 +402,7 @@ class Goods extends CI_Controller
             $price = empty($purchase_data->goods_price) ? 0 : $purchase_data->goods_price;
 
             //AS신청사유 수정
-            $this->Purchase_model->updateReason($purchase_seq, $reason);
+            if($copy == 'y') $this->Purchase_model->updateReason($purchase_seq, $reason);
 
         }
         
