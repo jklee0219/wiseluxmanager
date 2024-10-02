@@ -402,7 +402,7 @@ class Goods extends CI_Controller
             $price = empty($purchase_data->goods_price) ? 0 : $purchase_data->goods_price;
 
             //AS신청사유 수정
-            if($copy == 'y') $this->Purchase_model->updateReason($purchase_seq, $reason);
+            if($copy != 'y') $this->Purchase_model->updateReason($purchase_seq, $reason);
 
         }
         
