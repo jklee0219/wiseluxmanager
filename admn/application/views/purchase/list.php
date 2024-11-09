@@ -228,9 +228,10 @@
 	                     <th>매입지점</th>
 	                     <th>모델명</th>
 	                     <?php if(in_array($this->session->userdata('ADM_AUTH'), array(2,3,9))){ ?>
-	                     <th>매입거래가격</th>
-	                     <?php } ?>
+
 	                     <th>판매예정금액</th>
+                        <th>매입거래가격</th>
+	                     <?php } ?>
 	                     <th>등급</th>
 	                     <th>지급방법</th>
 	                     <th>비고</th>
