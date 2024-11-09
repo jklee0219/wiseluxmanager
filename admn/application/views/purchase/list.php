@@ -227,10 +227,10 @@
 	                     <th>종류</th>
 	                     <th>매입지점</th>
 	                     <th>모델명</th>
+	                     <th>판매예정금액</th>
 	                     <?php if(in_array($this->session->userdata('ADM_AUTH'), array(2,3,9))){ ?>
                        <th>매입거래가격</th>
 	                     <?php } ?>
-	                     <th>판매예정금액</th>
 	                     <th>등급</th>
 	                     <th>지급방법</th>
 	                     <th>비고</th>
@@ -312,10 +312,10 @@
 	                     <td><?=$kind?></td>
 	                     <td><?=$place?></td>
 	                     <td class="aleft"><?=$modelname?></td>
+	                     <td><?=number_format($goods_price)?></td>
 	                     <?php if(in_array($this->session->userdata('ADM_AUTH'), array(2,3,9))){ ?>
 	                     <td><?=$pprice?></td>
 	                     <?php }?> 
-	                     <td><?=number_format($goods_price)?></td>
 	                     <td><?=$class?></td>
 	                     <td><?=$paymethod?></td>
 	                     <td class="aleft"><?=$note?></td>
