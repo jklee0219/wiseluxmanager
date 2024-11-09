@@ -313,9 +313,9 @@
 	                     <td><?=$place?></td>
 	                     <td class="aleft"><?=$modelname?></td>
 	                     <?php if(in_array($this->session->userdata('ADM_AUTH'), array(2,3,9))){ ?>
-	                     <td><?=$pprice?></td>
-	                     <?php }?>
 	                     <td><?=number_format($goods_price)?></td>
+	                     <td><?=$pprice?></td>
+	                     <?php }?> 
 	                     <td><?=$class?></td>
 	                     <td><?=$paymethod?></td>
 	                     <td class="aleft"><?=$note?></td>

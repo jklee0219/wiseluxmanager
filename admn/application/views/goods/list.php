@@ -173,9 +173,9 @@
 	                     <th>지점명(층)</th>
 	                     <th>모델명</th>
 	                     <?php if(in_array($this->session->userdata('ADM_AUTH'), array(3,9))){ ?>
-	                     <th>매입가격</th>
-	                     <?php }?>
 	                     <th>판매예정금액</th>
+	                     <th>매입가격</th>
+	                     <?php }?>       
 	                     <th>재고</th>
 	                     <th></th>
 	                  </tr>
@@ -248,9 +248,9 @@
 	                     <td><?=$c24_origin_place_str?></td>
 	                     <td class="aleft"><?=$modelname?></td>
 	                     <?php if(in_array($this->session->userdata('ADM_AUTH'), array(3,9))){ ?>
-	                     <td><?=$pprice?></td>
-	                     <?php }?>
 	                     <td><?=$price?></td>
+	                     <td><?=$pprice?></td>
+	                     <?php }?>       
 	                     <td><?=$stock?></td>
 	                     <td>
 	                     	<button type="button" onclick="location.href='/admn/goods/modify?seq=<?=$seq?>&<?=$param?>'" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-wrench"></i> 상품수정</button>
