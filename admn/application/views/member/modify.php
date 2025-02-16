@@ -62,6 +62,12 @@
 					</div>
 				</div>
 				<div class="form-group">
+            	<div class="fwb col-sm-3 control-label" for="class">입사날짜</div>
+					<div class="col-sm-4 pt2">
+						<input type='text' maxlength="20" class='form-control input-sm' autocomplete="off" name='joindate' id="class" value="<?=$view->joindate?>">
+					</div>
+				</div>
+				<div class="form-group">
             		<div class="fwb col-sm-3 control-label" for="work_status">근무현황</div>
 					<div class="col-sm-4 pt2">
 						<select class='form-control input-sm' name="work_status">

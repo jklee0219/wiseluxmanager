@@ -25,8 +25,8 @@
 					<tr>
 						<th>이름</th>
 						<th>직책</th>
+						<th>입사날짜</th>
                         <th>아이디</th>
-                    
 					</tr>
 
 				</thead>
@@ -36,17 +36,13 @@
 					<tr>
 						<td><?=$v->name?></td>
 						<td><?=$v->class?></td>
+						<td><?=$v->joindate?></td>
                         <td><?=$v->id?></td>
 					</tr>
 					<?php } ?>
 
 				</tbody>
 			</table>
-		
-			<div class="content_bottom">
-				<div class="content_left"></div>
-				<div class="content_middle"><?=$paging_html?></div>
-			</div>
 
 		</div>
       

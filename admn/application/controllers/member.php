@@ -123,6 +123,7 @@ class Member extends CI_Controller
         $class = $this->input->post('class', TRUE) ? trim($this->input->post('class', TRUE)) : '';
         $phone = $this->input->post('phone', TRUE) ? trim($this->input->post('phone', TRUE)) : '';
         $ordernum = $this->input->post('ordernum', TRUE) ? trim($this->input->post('ordernum', TRUE)) : 0;
+        $joindate = $this->input->post('joindate', TRUE) ? trim($this->input->post('joindate', TRUE)) : '';
         $work_status = $this->input->post('work_status', TRUE) ? trim($this->input->post('work_status', TRUE)) : '근무중';
 
         if($id == '' || $password == ''){
@@ -138,6 +139,7 @@ class Member extends CI_Controller
             'phone' => $phone,
             'auth' => $auth,
             'ordernum' => $ordernum,
+            'joindate' => $joindate,
             'work_status' => $work_status
         );
         
@@ -187,6 +189,7 @@ class Member extends CI_Controller
         $class = $this->input->post('class', TRUE) ? trim($this->input->post('class', TRUE)) : '';
         $phone = $this->input->post('phone', TRUE) ? trim($this->input->post('phone', TRUE)) : '';
         $ordernum = $this->input->post('ordernum', TRUE) ? trim($this->input->post('ordernum', TRUE)) : 0;
+        $joindate = $this->input->post('joindate', TRUE) ? trim($this->input->post('joindate', TRUE)) : '';
         $work_status = $this->input->post('work_status', TRUE) ? trim($this->input->post('work_status', TRUE)) : '근무중';
         
         //유효성 체크
@@ -200,6 +203,7 @@ class Member extends CI_Controller
             'phone' => $phone,
             'auth' => $auth,
             'ordernum' => $ordernum,
+            'joindate' => $joindate,
             'work_status' => $work_status
         );
 
