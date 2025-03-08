@@ -278,6 +278,7 @@
 	                     }
 
 	                     if($account_conf == 'Y') $class_str = ' class="active5"';
+						 if($account_conf == 'C') $class_str = ' class="active6"';
 
 	                     $payment_price_1 = $v->payment_price_1;
 	                     $payment_price_1 = number_format($payment_price_1);

@@ -239,7 +239,8 @@
                <div class="col-sm-7 pt2">
                   <label class="account_conf_wrap">아니오 <input name="account_conf" type="radio" value="N" checked="checked"></label>
                   <label class="account_conf_wrap">예 <input name="account_conf" type="radio" value="Y"></label>
-                     </div>
+				  <label class="account_conf_wrap">위탁확인 <input name="account_conf" type="radio" value="C"></label>
+               </div>
                </div>
                <?php }?>
             	<div class="form-group">
