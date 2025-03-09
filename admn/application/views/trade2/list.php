@@ -168,6 +168,7 @@
 							<option value="">경리팀확인(전체)</option>
 							<option value="N"<?=($saccount_conf=='N') ? " selected='selected'" : ""?>>아니요</option>
 							<option value="Y"<?=($saccount_conf=='Y') ? " selected='selected'" : ""?>>예</option>
+							<option value="C"<?=($saccount_conf=='C') ? " selected='selected'" : ""?>>위탁확인</option>
 						</select>
 						<select class="form-control input-sm" name="spaymethod2">
 							<option value="">지급방법</option>
