@@ -228,9 +228,9 @@ function getPriceGuide(price){
 	}else if(v <= 1000000){
 		price_guide1 = (v * 13) / 100;		
 	}else if(v <= 10000000){
-		price_guide1 = (v * 11) / 100;
+		price_guide1 = (v * 12) / 100;
 	}else{
-		price_guide1 = (v * 7) / 100;
+		price_guide1 = (v * 8) / 100;
 	}
 
 	var kind = $('select[name="purchase_kind"]').val();
