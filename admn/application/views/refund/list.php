@@ -148,6 +148,8 @@
 							<option value="pcode" <?=($stype=='pcode') ? "selected='selected'" : ""?>>상품코드</option>
 							<option value="buyer" <?=($stype=='buyer') ? "selected='selected'" : ""?>>구매자</option>
 							<option value="buyerphone" <?=($stype=='buyerphone') ? "selected='selected'" : ""?>>연락처</option>
+                            <option value="tb_refund.reason" <?=($stype=='tb_refund.reason') ? "selected='selected'" : ""?>>반품사유</option> // 2025.3.25 검색추가
+                            <option value="tb_refund.note" <?=($stype=='tb_refund.note') ? "selected='selected'" : ""?>>비고</option>  // 2025.3.25 검색추가
 						</select>
 
 						<input type="text" class="form-control input-sm" autocomplete="off" name="skeyword" value="<?=$skeyword?>" placeholder="키워드 검색">
