@@ -252,6 +252,7 @@
                   <div class="col-sm-7 pt2">
                      <label class="account_conf_wrap">아니오 <input name="account_conf" type="radio" value="N"<?=($view->account_conf == 'N') ? ' checked="checked"' : ''?>></label>
                      <label class="account_conf_wrap">예 <input name="account_conf" type="radio" value="Y"<?=($view->account_conf == 'Y') ? ' checked="checked"' : ''?>></label>
+			    		 <label class="account_conf_wrap">계산서확인 <input name="account_conf" type="radio" value="C"<?=($view->account_conf == 'C') ? ' checked="checked"' : ''?>></label>
                   </div>
                </div>
                <?php }?>

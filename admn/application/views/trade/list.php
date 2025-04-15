@@ -162,6 +162,7 @@
 							<option value="">경리팀확인(전체)</option>
 							<option value="N"<?=($saccount_conf=='N') ? " selected='selected'" : ""?>>아니요</option>
 							<option value="Y"<?=($saccount_conf=='Y') ? " selected='selected'" : ""?>>예</option>
+							<option value="C"<?=($saccount_conf=='C') ? " selected='selected'" : ""?>>계산서확인</option>
 						</select>
 						<select class="form-control input-sm" name="splace">
 							<option value="">지점명(전체)</option>
@@ -251,6 +252,7 @@
 	                     $trclass = '';
 	                     if($stock == '없음') $trclass = ' class="active"';
 	                     if($account_conf == 'Y') $trclass = ' class="active5"';
+						      if($account_conf == 'C') $class_str = ' class="active7"';
 
 	                     $payment_price_1 = $v->payment_price_1;
 	                     $payment_price_1 = number_format($payment_price_1);
