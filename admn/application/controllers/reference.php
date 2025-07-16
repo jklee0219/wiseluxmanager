@@ -100,6 +100,7 @@ class Reference extends CI_Controller
             "getTopCnt3" => $this->Reference_model->getTopCnt($condition,'기타'),
             "getTopCnt4" => $this->Reference_model->getTopCnt($condition,'상품관련'),
             "getTopCnt5" => $this->Reference_model->getTopCnt($condition,'회사내규'),
+            "getTopCnt6" => $this->Reference_model->getTopCnt($condition,'블랙리스트'),
 		);
 		
 		$this->load->view('reference/list', $data);
