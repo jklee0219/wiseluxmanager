@@ -108,9 +108,7 @@
                         </div>
 						<select class="form-control input-sm" name="stype">
 							<option value="pcode" <?=($stype=='pcode') ? "selected='selected'" : ""?>>상품코드</option>
-                            <option value="seller" <?=($stype=='seller') ? "selected='selected'" : ""?>>판매자</option>
-                            <option value="sellerphone" <?=($stype=='sellerphone') ? "selected='selected'" : ""?>>판매자연락처</option>
-                            <option value="reciveplace" <?=($stype=='reciveplace') ? "selected='selected'" : ""?>>수령지점</option>
+                            <option value="modelname" <?=($stype=='modelname') ? "selected='selected'" : ""?>>모델명</option>
 							<option value="tb_purchase.note" <?=($stype=='tb_purchase.note') ? "selected='selected'" : ""?>>비고</option>
 						</select>
 						<input type="text" class="form-control input-sm" autocomplete="off" name="skeyword" value="<?=$skeyword?>" placeholder="키워드 검색">
