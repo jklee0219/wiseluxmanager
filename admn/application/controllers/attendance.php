@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Attendance extends CI_Controller
 {
-    // ========================================
+        // ========================================
     // 🔒 권한 설정: 여기에 아이디 추가/삭제
     // ========================================
     private $allowed_users = array(
@@ -23,7 +23,10 @@ class Attendance extends CI_Controller
         include $_SERVER['DOCUMENT_ROOT'].'/comm/func.php';
         include $_SERVER['DOCUMENT_ROOT'].'/admn/application/controllers/commvar.php';
         include $_SERVER['DOCUMENT_ROOT'].'/admn/application/controllers/loginchk.php';
-        $this->load->model('attendance_model');
+        $this->load->model('Attendance_model');
+        
+        // 근무현황 권한 설정 로드
+        $this->config->load('attendance');
         
         // 접속체크
         $this->load->model('Access_model');
@@ -43,7 +46,8 @@ class Attendance extends CI_Controller
     private function checkPermission()
     {
         $user_id = $this->session->userdata('ADM_ID');
-        return in_array($user_id, $this->allowed_users);
+        $allowed_users = $this->config->item('attendance_managers');
+        return in_array($user_id, $allowed_users);
     }
     
     // 메인 리스트
@@ -64,11 +68,12 @@ class Attendance extends CI_Controller
         if($stype) $condition['stype'] = $stype;
         if($skeyword) $condition['skeyword'] = $skeyword;
         
-        $board_cnt = $this->attendance_model->getListCnt($condition);
+        $board_cnt = $this->Attendance_model->getListCnt($condition);
         
         // 통계
-        $annualCnt = $this->attendance_model->getAnnualCnt();
-        $earlyCnt = $this->attendance_model->getEarlyCnt();
+        $annualCnt = $this->Attendance_model->getAnnualCnt();
+        $halfCnt = $this->Attendance_model->getHalfCnt();
+        $sickCnt = $this->Attendance_model->getSickCnt();
         
         // 페이징
         $total_page  = 0;
@@ -83,7 +88,7 @@ class Attendance extends CI_Controller
         $param2 = "&sdate=".$sdate."&edate=".$edate."&att_type=".$att_type."&stype=".$stype."&skeyword=".$skeyword;
         $param = "page=".$page.$param2;
         
-        $board_list = $this->attendance_model->getList($condition, $scale, $first);
+        $board_list = $this->Attendance_model->getList($condition, $scale, $first);
         
         // 페이징 HTML 생성
         $paging_html = '';
@@ -113,7 +118,7 @@ class Attendance extends CI_Controller
         }
 
         // 달력용 전체 리스트
-        $alllist = $this->attendance_model->getAllList();
+        $alllist = $this->Attendance_model->getAllList();
         
         $data = array(
             "sdate" => $sdate,
@@ -127,9 +132,10 @@ class Attendance extends CI_Controller
             "paging_html" => $paging_html,
             "param" => $param,
             "annualCnt" => $annualCnt,
-            "earlyCnt" => $earlyCnt,
+            "halfCnt" => $halfCnt,
+            "sickCnt" => $sickCnt,
             'alllist' => $alllist,
-            'has_permission' => $this->checkPermission(),
+            'has_permission' => $this->checkPermission(), // 권한 체크
         );
         
         $this->load->view('attendance/list', $data);
@@ -155,7 +161,7 @@ class Attendance extends CI_Controller
         $param = "page=".$page.$param2;
         
         // 근무중인 직원 목록
-        $worker_list = $this->attendance_model->getWorkerList();
+        $worker_list = $this->Attendance_model->getWorkerList();
         
         $data = array(
             "param" => $param,
@@ -196,7 +202,7 @@ class Attendance extends CI_Controller
         }
         
         // 중복 체크
-        $duplicate = $this->attendance_model->checkDuplicate($worker_id, $att_date);
+        $duplicate = $this->Attendance_model->checkDuplicate($worker_id, $att_date);
         if($duplicate > 0) {
             doMsgBack('해당 날짜에 이미 등록된 직원입니다.');
             return;
@@ -220,7 +226,7 @@ class Attendance extends CI_Controller
             'note' => $note,
         );
         
-        $this->attendance_model->insertList($data);
+        $this->Attendance_model->insertList($data);
         doMsgLocation('등록되었습니다.',"http://".$_SERVER['HTTP_HOST']."/admn/attendance?".$param);
     }
     
@@ -244,8 +250,8 @@ class Attendance extends CI_Controller
         $param2 = "&sdate=".$sdate."&edate=".$edate."&att_type=".$att_type."&stype=".$stype."&skeyword=".$skeyword;
         $param = "page=".$page.$param2;
         
-        $info = $this->attendance_model->getInfo($seq);
-        $worker_list = $this->attendance_model->getWorkerList();
+        $info = $this->Attendance_model->getInfo($seq);
+        $worker_list = $this->Attendance_model->getWorkerList();
         
         $data = array(
             "param" => $param,
@@ -287,7 +293,7 @@ class Attendance extends CI_Controller
         }
         
         // 중복 체크 (자기 자신 제외)
-        $duplicate = $this->attendance_model->checkDuplicate($worker_id, $att_date, $seq);
+        $duplicate = $this->Attendance_model->checkDuplicate($worker_id, $att_date, $seq);
         if($duplicate > 0) {
             doMsgBack('해당 날짜에 이미 등록된 직원입니다.');
             return;
@@ -311,7 +317,7 @@ class Attendance extends CI_Controller
             'note' => $note,
         );
         
-        $this->attendance_model->updateList($seq, $data);
+        $this->Attendance_model->updateList($seq, $data);
         doMsgLocation('수정되었습니다.',"http://".$_SERVER['HTTP_HOST']."/admn/attendance?".$param);
     }
     
@@ -335,7 +341,7 @@ class Attendance extends CI_Controller
         $param2 = "&sdate=".$sdate."&edate=".$edate."&att_type=".$att_type."&stype=".$stype."&skeyword=".$skeyword;
         $param = "page=".$page.$param2;
         
-        $this->attendance_model->deleteList($seq);
+        $this->Attendance_model->deleteList($seq);
         doMsgLocation('삭제되었습니다.',"http://".$_SERVER['HTTP_HOST']."/admn/attendance?".$param);
     }
     
@@ -361,7 +367,7 @@ class Attendance extends CI_Controller
         if($stype) $condition['stype'] = $stype;
         if($skeyword) $condition['skeyword'] = $skeyword;
         
-        $board_list = $this->attendance_model->getList($condition);
+        $board_list = $this->Attendance_model->getList($condition);
         
         if(count($board_list) == 0){
             doMsgLocation('다운받을 데이터가 존재하지 않습니다.');
@@ -379,22 +385,24 @@ class Attendance extends CI_Controller
         $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(30);
         
         $objPHPExcel->setActiveSheetIndex(0)
         ->setCellValue("A1", '날짜')
         ->setCellValue("B1", '직원명')
         ->setCellValue("C1", '직책')
-        ->setCellValue("D1", '연차사용')
-        ->setCellValue("E1", '조퇴사용')
-        ->setCellValue("F1", '비고');
+        ->setCellValue("D1", '연차')
+        ->setCellValue("E1", '반차')
+        ->setCellValue("F1", '병가')
+        ->setCellValue("G1", '비고');
         
-        $objPHPExcel->getActiveSheet()->getStyle("A1:F1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objPHPExcel->getActiveSheet()->getStyle("A1:F1")->getFill()->applyFromArray(array(
+        $objPHPExcel->getActiveSheet()->getStyle("A1:G1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle("A1:G1")->getFill()->applyFromArray(array(
             'type' => PHPExcel_Style_Fill::FILL_SOLID,
             'startcolor' => array( 'rgb' => 'f5ebed' )
         ));
-        $objPHPExcel->getActiveSheet()->getStyle("A1:F1")->applyFromArray(
+        $objPHPExcel->getActiveSheet()->getStyle("A1:G1")->applyFromArray(
             array(
                 'borders' => array(
                     'allborders' => array(
@@ -410,7 +418,8 @@ class Attendance extends CI_Controller
             $worker_name = $v->worker_name;
             $worker_class = $v->worker_class;
             $annual_use = ($v->att_type == '연차') ? 'O' : '';
-            $early_use = ($v->att_type == '조퇴') ? 'O' : '';
+            $half_use = ($v->att_type == '반차') ? 'O' : '';
+            $sick_use = ($v->att_type == '병가') ? 'O' : '';
             $note = $v->note;
             
             $objPHPExcel->setActiveSheetIndex(0)
@@ -418,13 +427,14 @@ class Attendance extends CI_Controller
             ->setCellValue("B".($k+2), $worker_name)
             ->setCellValue("C".($k+2), $worker_class)
             ->setCellValue("D".($k+2), $annual_use)
-            ->setCellValue("E".($k+2), $early_use)
-            ->setCellValue("F".($k+2), $note);
+            ->setCellValue("E".($k+2), $half_use)
+            ->setCellValue("F".($k+2), $sick_use)
+            ->setCellValue("G".($k+2), $note);
             
-            $objPHPExcel->getActiveSheet()->getStyle("A".($k+2).":F".($k+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+            $objPHPExcel->getActiveSheet()->getStyle("A".($k+2).":G".($k+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         }
         
-        $objPHPExcel->getActiveSheet()->getStyle('A1:F'.($k+2))->getFont()->setSize(10);
+        $objPHPExcel->getActiveSheet()->getStyle('A1:G'.($k+2))->getFont()->setSize(10);
         
         $objPHPExcel->getActiveSheet()->setTitle($filename);
         $objPHPExcel->setActiveSheetIndex(0);

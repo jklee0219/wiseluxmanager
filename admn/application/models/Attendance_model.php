@@ -81,9 +81,9 @@ class Attendance_model extends CI_Model
     {
         $this->db->select("
             att_date,
-            SUM(CASE WHEN att_type = '근무' THEN 1 ELSE 0 END) as work_cnt,
             SUM(CASE WHEN att_type = '연차' THEN 1 ELSE 0 END) as annual_cnt,
-            SUM(CASE WHEN att_type = '조퇴' THEN 1 ELSE 0 END) as early_cnt
+            SUM(CASE WHEN att_type = '반차' THEN 1 ELSE 0 END) as half_cnt,
+            SUM(CASE WHEN att_type = '병가' THEN 1 ELSE 0 END) as sick_cnt
         ");
         $this->db->from('tb_attendance');
         $this->db->group_by('att_date');
@@ -172,12 +172,22 @@ class Attendance_model extends CI_Model
         return $result->cnt;
     }
 
-    // 통계: 조퇴 건수
-    function getEarlyCnt()
+    // 통계: 반차 건수
+    function getHalfCnt()
     {
         $this->db->select('count(*) as cnt');
         $this->db->from('tb_attendance');
-        $this->db->where('att_type', '조퇴');
+        $this->db->where('att_type', '반차');
+        $result = $this->db->get()->row();
+        return $result->cnt;
+    }
+
+    // 통계: 병가 건수
+    function getSickCnt()
+    {
+        $this->db->select('count(*) as cnt');
+        $this->db->from('tb_attendance');
+        $this->db->where('att_type', '병가');
         $result = $this->db->get()->row();
         return $result->cnt;
     }

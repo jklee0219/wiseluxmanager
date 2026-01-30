@@ -61,9 +61,9 @@
 							<td>
 								<select class="form-control input-sm" name="att_type" style="width:200px;" required>
 									<option value="">선택</option>
-									<option value="근무" <?=($info->att_type == '근무') ? 'selected' : ''?>>근무</option>
 									<option value="연차" <?=($info->att_type == '연차') ? 'selected' : ''?>>연차</option>
-									<option value="조퇴" <?=($info->att_type == '조퇴') ? 'selected' : ''?>>조퇴</option>
+									<option value="반차" <?=($info->att_type == '반차') ? 'selected' : ''?>>반차</option>
+									<option value="병가" <?=($info->att_type == '병가') ? 'selected' : ''?>>병가</option>
 								</select>
 							</td>
 						</tr>

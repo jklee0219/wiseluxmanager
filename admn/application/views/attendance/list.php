@@ -30,8 +30,12 @@
                                 <td class="txt"><?=number_format($annualCnt)?>건</td>
                             </tr>
                             <tr>
-                                <td class="bg">조퇴</td>
-                                <td class="txt"><?=number_format($earlyCnt)?>건</td>
+                                <td class="bg">반차</td>
+                                <td class="txt"><?=number_format($halfCnt)?>건</td>
+                            </tr>
+                            <tr>
+                                <td class="bg">병가</td>
+                                <td class="txt"><?=number_format($sickCnt)?>건</td>
                             </tr>
                         </table>
                     </div>
@@ -39,9 +43,9 @@
                         <div style="margin-bottom:6px">
                             <select class="form-control input-sm" name="att_type">
                                 <option value="">근무유형(전체)</option>
-                                <option value="근무" <?=($att_type=='근무') ? "selected='selected'" : ""?>>근무</option>
                                 <option value="연차" <?=($att_type=='연차') ? "selected='selected'" : ""?>>연차</option>
-                                <option value="조퇴" <?=($att_type=='조퇴') ? "selected='selected'" : ""?>>조퇴</option>
+                                <option value="반차" <?=($att_type=='반차') ? "selected='selected'" : ""?>>반차</option>
+                                <option value="병가" <?=($att_type=='병가') ? "selected='selected'" : ""?>>병가</option>
                             </select>
                         </div>
                         <div class="startdate_wrap">
@@ -107,9 +111,10 @@
                                 
                                 // 근무유형별 색상
                                 $type_color = '';
-                                if($att_type_label == '연차') $type_color = 'color:#e74c3c;';
-                                else if($att_type_label == '조퇴') $type_color = 'color:#f39c12;';
-                                else $type_color = 'color:#27ae60;';
+                                if($att_type_label == '연차') $type_color = 'color:#e74c3c;';        // 빨간색
+                                else if($att_type_label == '반차') $type_color = 'color:#f39c12;';   // 주황색
+                                else if($att_type_label == '병가') $type_color = 'color:#3498db;';   // 파란색
+                                else $type_color = 'color:#95a5a6;';                                  // 회색 (기타)
                         ?>
                         <tr>
                             <td><?=$att_date?></td>
@@ -153,11 +158,12 @@
             var events = [
                 <?php foreach($alllist as $item){ ?>
                 { 
-                    title: '연차:<?=$item->annual_cnt?> 조퇴:<?=$item->early_cnt?>', 
+                    title: '연차:<?=$item->annual_cnt?> 반차:<?=$item->half_cnt?> 병가:<?=$item->sick_cnt?>', 
                     start: '<?=$item->att_date?>', 
-                    description: '연차: <?=$item->annual_cnt?>명<br>조퇴: <?=$item->early_cnt?>명',
+                    description: '연차: <?=$item->annual_cnt?>명<br>반차: <?=$item->half_cnt?>명<br>병가: <?=$item->sick_cnt?>명',
                     annualCnt: <?=$item->annual_cnt?>,
-                    earlyCnt: <?=$item->early_cnt?>
+                    halfCnt: <?=$item->half_cnt?>,
+                    sickCnt: <?=$item->sick_cnt?>
                 },
                 <?php } ?>
             ];
@@ -191,14 +197,18 @@
                 },
                 eventContent: function(arg) {
                     let annualCnt = arg.event.extendedProps.annualCnt;
-                    let earlyCnt = arg.event.extendedProps.earlyCnt;
+                    let halfCnt = arg.event.extendedProps.halfCnt;
+                    let sickCnt = arg.event.extendedProps.sickCnt;
                     
                     let html = '<div style="font-size:11px; padding:2px;">';
                     if(annualCnt > 0) {
                         html += '<div style="color:#e74c3c;">연차:' + annualCnt + '</div>';
                     }
-                    if(earlyCnt > 0) {
-                        html += '<div style="color:#f39c12;">조퇴:' + earlyCnt + '</div>';
+                    if(halfCnt > 0) {
+                        html += '<div style="color:#f39c12;">반차:' + halfCnt + '</div>';
+                    }
+                    if(sickCnt > 0) {
+                        html += '<div style="color:#3498db;">병가:' + sickCnt + '</div>';
                     }
                     html += '</div>';
                     
