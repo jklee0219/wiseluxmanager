@@ -3,6 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Attendance extends CI_Controller
 {
+    // ========================================
+    // 🔒 권한 설정: 여기에 아이디 추가/삭제
+    // ========================================
+    private $allowed_users = array(
+        'admin',        // 예시 아이디 1
+        'lagerfeld',      // 예시 아이디 2
+        'dev',      // 예시 아이디 3
+        'wiseluxyong',      // 예시 아이디 4
+        'jhkim2232',      // 예시 아이디 5
+        // 아래에 추가하세요
+        // 'your_id',
+    );
+    // ========================================
+    
     function __construct()
     {
         parent::__construct();
@@ -25,6 +39,13 @@ class Attendance extends CI_Controller
         $this->Access_model->set_ip($id);
     }
     
+    // 권한 체크 함수
+    private function checkPermission()
+    {
+        $user_id = $this->session->userdata('ADM_ID');
+        return in_array($user_id, $this->allowed_users);
+    }
+    
     // 메인 리스트
     public function index()
     {
@@ -43,11 +64,11 @@ class Attendance extends CI_Controller
         if($stype) $condition['stype'] = $stype;
         if($skeyword) $condition['skeyword'] = $skeyword;
         
-        $board_cnt = $this->Attendance_model->getListCnt($condition);
+        $board_cnt = $this->attendance_model->getListCnt($condition);
         
         // 통계
-        $annualCnt = $this->Attendance_model->getAnnualCnt();
-        $earlyCnt = $this->Attendance_model->getEarlyCnt();
+        $annualCnt = $this->attendance_model->getAnnualCnt();
+        $earlyCnt = $this->attendance_model->getEarlyCnt();
         
         // 페이징
         $total_page  = 0;
@@ -62,7 +83,7 @@ class Attendance extends CI_Controller
         $param2 = "&sdate=".$sdate."&edate=".$edate."&att_type=".$att_type."&stype=".$stype."&skeyword=".$skeyword;
         $param = "page=".$page.$param2;
         
-        $board_list = $this->Attendance_model->getList($condition, $scale, $first);
+        $board_list = $this->attendance_model->getList($condition, $scale, $first);
         
         // 페이징 HTML 생성
         $paging_html = '';
@@ -92,7 +113,7 @@ class Attendance extends CI_Controller
         }
 
         // 달력용 전체 리스트
-        $alllist = $this->Attendance_model->getAllList();
+        $alllist = $this->attendance_model->getAllList();
         
         $data = array(
             "sdate" => $sdate,
@@ -108,6 +129,7 @@ class Attendance extends CI_Controller
             "annualCnt" => $annualCnt,
             "earlyCnt" => $earlyCnt,
             'alllist' => $alllist,
+            'has_permission' => $this->checkPermission(),
         );
         
         $this->load->view('attendance/list', $data);
@@ -116,6 +138,12 @@ class Attendance extends CI_Controller
     // 등록 페이지
     function write()
     {
+        // 권한 체크
+        if(!$this->checkPermission()) {
+            doMsgLocation('권한이 없습니다.', '/admn/attendance');
+            return;
+        }
+        
         $page     = $this->input->get('page', TRUE) ? $this->input->get('page', TRUE) : 1;
         $sdate    = $this->input->get('sdate', TRUE);
         $edate    = $this->input->get('edate', TRUE);
@@ -127,7 +155,7 @@ class Attendance extends CI_Controller
         $param = "page=".$page.$param2;
         
         // 근무중인 직원 목록
-        $worker_list = $this->Attendance_model->getWorkerList();
+        $worker_list = $this->attendance_model->getWorkerList();
         
         $data = array(
             "param" => $param,
@@ -140,6 +168,12 @@ class Attendance extends CI_Controller
     // 등록 처리
     function writeproc()
     {
+        // 권한 체크
+        if(!$this->checkPermission()) {
+            doMsgLocation('권한이 없습니다.', '/admn/attendance');
+            return;
+        }
+        
         $page     = $this->input->post('page', TRUE) ? $this->input->post('page', TRUE) : 1;
         $sdate    = $this->input->post('sdate', TRUE);
         $edate    = $this->input->post('edate', TRUE);
@@ -162,7 +196,7 @@ class Attendance extends CI_Controller
         }
         
         // 중복 체크
-        $duplicate = $this->Attendance_model->checkDuplicate($worker_id, $att_date);
+        $duplicate = $this->attendance_model->checkDuplicate($worker_id, $att_date);
         if($duplicate > 0) {
             doMsgBack('해당 날짜에 이미 등록된 직원입니다.');
             return;
@@ -186,13 +220,19 @@ class Attendance extends CI_Controller
             'note' => $note,
         );
         
-        $this->Attendance_model->insertList($data);
+        $this->attendance_model->insertList($data);
         doMsgLocation('등록되었습니다.',"http://".$_SERVER['HTTP_HOST']."/admn/attendance?".$param);
     }
     
     // 수정 페이지
     function modify()
     {
+        // 권한 체크
+        if(!$this->checkPermission()) {
+            doMsgLocation('권한이 없습니다.', '/admn/attendance');
+            return;
+        }
+        
         $seq      = $this->input->get('seq', TRUE);
         $page     = $this->input->get('page', TRUE) ? $this->input->get('page', TRUE) : 1;
         $sdate    = $this->input->get('sdate', TRUE);
@@ -204,8 +244,8 @@ class Attendance extends CI_Controller
         $param2 = "&sdate=".$sdate."&edate=".$edate."&att_type=".$att_type."&stype=".$stype."&skeyword=".$skeyword;
         $param = "page=".$page.$param2;
         
-        $info = $this->Attendance_model->getInfo($seq);
-        $worker_list = $this->Attendance_model->getWorkerList();
+        $info = $this->attendance_model->getInfo($seq);
+        $worker_list = $this->attendance_model->getWorkerList();
         
         $data = array(
             "param" => $param,
@@ -219,6 +259,12 @@ class Attendance extends CI_Controller
     // 수정 처리
     function modifyproc()
     {
+        // 권한 체크
+        if(!$this->checkPermission()) {
+            doMsgLocation('권한이 없습니다.', '/admn/attendance');
+            return;
+        }
+        
         $seq      = $this->input->post('seq', TRUE);
         $page     = $this->input->post('page', TRUE) ? $this->input->post('page', TRUE) : 1;
         $sdate    = $this->input->post('sdate', TRUE);
@@ -241,7 +287,7 @@ class Attendance extends CI_Controller
         }
         
         // 중복 체크 (자기 자신 제외)
-        $duplicate = $this->Attendance_model->checkDuplicate($worker_id, $att_date, $seq);
+        $duplicate = $this->attendance_model->checkDuplicate($worker_id, $att_date, $seq);
         if($duplicate > 0) {
             doMsgBack('해당 날짜에 이미 등록된 직원입니다.');
             return;
@@ -265,13 +311,19 @@ class Attendance extends CI_Controller
             'note' => $note,
         );
         
-        $this->Attendance_model->updateList($seq, $data);
+        $this->attendance_model->updateList($seq, $data);
         doMsgLocation('수정되었습니다.',"http://".$_SERVER['HTTP_HOST']."/admn/attendance?".$param);
     }
     
     // 삭제
     function delproc()
     {
+        // 권한 체크
+        if(!$this->checkPermission()) {
+            doMsgLocation('권한이 없습니다.', '/admn/attendance');
+            return;
+        }
+        
         $seq      = $this->input->get('seq', TRUE);
         $page     = $this->input->get('page', TRUE) ? $this->input->get('page', TRUE) : 1;
         $sdate    = $this->input->get('sdate', TRUE);
@@ -283,15 +335,17 @@ class Attendance extends CI_Controller
         $param2 = "&sdate=".$sdate."&edate=".$edate."&att_type=".$att_type."&stype=".$stype."&skeyword=".$skeyword;
         $param = "page=".$page.$param2;
         
-        $this->Attendance_model->deleteList($seq);
+        $this->attendance_model->deleteList($seq);
         doMsgLocation('삭제되었습니다.',"http://".$_SERVER['HTTP_HOST']."/admn/attendance?".$param);
     }
     
     // 엑셀 다운로드
     function excel()
     {
-        if(!in_array($this->session->userdata('ADM_AUTH'), array(3,9))){
-            doMsgLocation('잘못된 요청 입니다.', "http://".$_SERVER['HTTP_HOST']);
+        // 권한 체크
+        if(!$this->checkPermission()) {
+            doMsgLocation('권한이 없습니다.', '/admn/attendance');
+            return;
         }
         
         $condition = array();
@@ -307,7 +361,7 @@ class Attendance extends CI_Controller
         if($stype) $condition['stype'] = $stype;
         if($skeyword) $condition['skeyword'] = $skeyword;
         
-        $board_list = $this->Attendance_model->getList($condition);
+        $board_list = $this->attendance_model->getList($condition);
         
         if(count($board_list) == 0){
             doMsgLocation('다운받을 데이터가 존재하지 않습니다.');

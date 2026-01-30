@@ -13,29 +13,29 @@
 </head>
 <body>
 
-   	<?php include $_SERVER['DOCUMENT_ROOT'].'/admn/application/views/comm/navi.php';?>
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/admn/application/views/comm/navi.php';?>
 
-	<div id="content">
-		<div id="content_title">
-			<script>document.write($('.nav li .active').text());</script>	
-		</div>
+    <div id="content">
+        <div id="content_title">
+            <script>document.write($('.nav li .active').text());</script>   
+        </div>
 
-		<div class="content_list">
-         	<div class="content_top">
-            	<div>
-            		<div class="amount_info_wrap">
-            			<table>
-            				<tr>
-            					<td class="bg">연차</td>
-            					<td class="txt"><?=number_format($annualCnt)?>건</td>
-            				</tr>
-            				<tr>
-            					<td class="bg">조퇴</td>
-            					<td class="txt"><?=number_format($earlyCnt)?>건</td>
-            				</tr>
-            			</table>
-            		</div>
-               		<form name="searchFrm" action="/admn/attendance" method="get">
+        <div class="content_list">
+            <div class="content_top">
+                <div>
+                    <div class="amount_info_wrap">
+                        <table>
+                            <tr>
+                                <td class="bg">연차</td>
+                                <td class="txt"><?=number_format($annualCnt)?>건</td>
+                            </tr>
+                            <tr>
+                                <td class="bg">조퇴</td>
+                                <td class="txt"><?=number_format($earlyCnt)?>건</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <form name="searchFrm" action="/admn/attendance" method="get">
                         <div style="margin-bottom:6px">
                             <select class="form-control input-sm" name="att_type">
                                 <option value="">근무유형(전체)</option>
@@ -44,38 +44,38 @@
                                 <option value="조퇴" <?=($att_type=='조퇴') ? "selected='selected'" : ""?>>조퇴</option>
                             </select>
                         </div>
-                  		<div class="startdate_wrap">
-	               			<div class="input-group date">
-							    <input type="text" name="sdate" class="form-control input-sm" autocomplete="off" placeholder="시작일" value="<?=$sdate?>">
-							    <div class="input-group-addon input-sm">
-							        <span class="glyphicon glyphicon-calendar"></span>
-							    </div>
-							</div>
-						</div>~
-						<div class="enddate_wrap">
-	               			<div class="input-group date">
-							    <input type="text" name="edate" class="form-control input-sm" autocomplete="off" placeholder="종료일" value="<?=$edate?>">
-							    <div class="input-group-addon input-sm">
-							        <span class="glyphicon glyphicon-calendar"></span>
-							    </div>
-							</div>
-						</div>
-						<select class="form-control input-sm" name="stype">
-							<option value="worker_name" <?=($stype=='worker_name') ? "selected='selected'" : ""?>>직원명</option>
+                        <div class="startdate_wrap">
+                            <div class="input-group date">
+                                <input type="text" name="sdate" class="form-control input-sm" autocomplete="off" placeholder="시작일" value="<?=$sdate?>">
+                                <div class="input-group-addon input-sm">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                            </div>
+                        </div>~
+                        <div class="enddate_wrap">
+                            <div class="input-group date">
+                                <input type="text" name="edate" class="form-control input-sm" autocomplete="off" placeholder="종료일" value="<?=$edate?>">
+                                <div class="input-group-addon input-sm">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <select class="form-control input-sm" name="stype">
+                            <option value="worker_name" <?=($stype=='worker_name') ? "selected='selected'" : ""?>>직원명</option>
                             <option value="worker_id" <?=($stype=='worker_id') ? "selected='selected'" : ""?>>직원ID</option>
-						</select>
-						<input type="text" class="form-control input-sm" autocomplete="off" name="skeyword" value="<?=$skeyword?>" placeholder="키워드 검색">
-                  		<button type="button" onclick="searchFrm.submit()" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-search"></i> 검색</button>
-                        <?php if(in_array($this->session->userdata('ADM_AUTH'), array(3,9))){ ?>
-                  		<button type="button" id="excel_btn" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-save-file"></i> 엑셀</button>
+                        </select>
+                        <input type="text" class="form-control input-sm" autocomplete="off" name="skeyword" value="<?=$skeyword?>" placeholder="키워드 검색">
+                        <button type="button" onclick="searchFrm.submit()" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-search"></i> 검색</button>
+                        <?php if($has_permission){ ?>
+                        <button type="button" id="excel_btn" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-save-file"></i> 엑셀</button>
+                        <button type="button" onclick="location.href='./attendance/write?<?=$param?>'" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-pencil"></i> 등록</button>
                         <?php }?>
-                  		<button type="button" onclick="location.href='./attendance/write?<?=$param?>'" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-pencil"></i> 등록</button>
-                  		<p class="line"></p>
-               		</form>
-				</div>
-         	</div>
-	
-         	<div class="calendar_wrap">
+                        <p class="line"></p>
+                    </form>
+                </div>
+            </div>
+    
+            <div class="calendar_wrap">
                 <div>
                     <div id='calendar'></div>
                     <div id="tooltip"></div>
@@ -118,8 +118,10 @@
                             <td style="<?=$type_color?> font-weight:bold;"><?=$att_type_label?></td>
                             <td><?=$note?></td>
                             <td>
+                                <?php if($has_permission){ ?>
                                 <button type="button" onclick="location.href='./attendance/modify?seq=<?=$seq?>&<?=$param?>'" class="btn btn-info btn-xs">수정</button>
                                 <button type="button" onclick="if(confirm('삭제하시겠습니까?')) location.href='./attendance/delproc?seq=<?=$seq?>&<?=$param?>'" class="btn btn-danger btn-xs">삭제</button>
+                                <?php } ?>
                             </td>
                         </tr>
                         <?php
