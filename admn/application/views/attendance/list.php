@@ -66,10 +66,10 @@
 						</select>
 						<input type="text" class="form-control input-sm" autocomplete="off" name="skeyword" value="<?=$skeyword?>" placeholder="키워드 검색">
                   		<button type="button" onclick="searchFrm.submit()" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-search"></i> 검색</button>
-                        <?php if(in_array($this->session->userdata('ADM_AUTH'), array(3,9))){ ?>
+                        <?php if($has_permission){ ?>
                   		<button type="button" id="excel_btn" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-save-file"></i> 엑셀</button>
-                        <?php }?>
                   		<button type="button" onclick="location.href='./attendance/write?<?=$param?>'" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-pencil"></i> 등록</button>
+                        <?php }?>
                   		<p class="line"></p>
                		</form>
 				</div>
@@ -118,8 +118,10 @@
                             <td style="<?=$type_color?> font-weight:bold;"><?=$att_type_label?></td>
                             <td><?=$note?></td>
                             <td>
+                                <?php if($has_permission){ ?>
                                 <button type="button" onclick="location.href='./attendance/modify?seq=<?=$seq?>&<?=$param?>'" class="btn btn-info btn-xs">수정</button>
                                 <button type="button" onclick="if(confirm('삭제하시겠습니까?')) location.href='./attendance/delproc?seq=<?=$seq?>&<?=$param?>'" class="btn btn-danger btn-xs">삭제</button>
+                                <?php } ?>
                             </td>
                         </tr>
                         <?php
