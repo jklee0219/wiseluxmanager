@@ -13,10 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $config['attendance_managers'] = array(
     'admin',        // 관리자
-    'dev',      // 와이즈럭스
-    'lagerfeld',
-    'wiseluxyong',
-    'jhkim2232'
+    'wiselux',      // 와이즈럭스
     // 아래에 권한을 줄 아이디를 추가하세요
     // 'hong',
     // 'kim',
