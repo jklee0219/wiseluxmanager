@@ -9,7 +9,7 @@ class Attendance extends CI_Controller
         include $_SERVER['DOCUMENT_ROOT'].'/comm/func.php';
         include $_SERVER['DOCUMENT_ROOT'].'/admn/application/controllers/commvar.php';
         include $_SERVER['DOCUMENT_ROOT'].'/admn/application/controllers/loginchk.php';
-        $this->load->model('Attendance_model');
+        $this->load->model('attendance_model');
         
         // 접속체크
         $this->load->model('Access_model');
