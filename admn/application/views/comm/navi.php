@@ -25,7 +25,11 @@
    <li><a href="/admn/member" class="waves-effect<?=stripos($_SERVER['PHP_SELF'],'member')!==false ? ' active' : ''?>"><i class="glyphicon glyphicon-user"></i> 사용자관리<i class="glyphicon glyphicon-menu-right pull-right"></i></a></li>
    <?php } ?>
    <li><a href="/admn/workers" class="waves-effect<?=stripos($_SERVER['PHP_SELF'],'workers')!==false ? ' active' : ''?>"><i class="glyphicon glyphicon-user"></i> 직원명부<i class="glyphicon glyphicon-menu-right pull-right"></i></a></li>
-   <li><a href="/admn/bloggerlist" class="waves-effect<?=stripos($_SERVER['PHP_SELF'],'bloggerlist')!==false ? ' active' : ''?>"><i class="glyphicon glyphicon-duplicate"></i> 블로거리스트<i class="glyphicon glyphicon-menu-right pull-right"></i></a></li>
 
+   <li><a href="/admn/bloggerlist" class="waves-effect<?=stripos($_SERVER['PHP_SELF'],'bloggerlist')!==false ? ' active' : ''?>"><i class="glyphicon glyphicon-duplicate"></i> 블로거리스트<i class="glyphicon glyphicon-menu-right pull-right"></i></a></li>
+<li>
+    <a href="/admn/attendance" class="<?=($this->uri->segment(2)=='attendance') ? 'active' : ''?>"><i class="glyphicon glyphicon-ok"></i>         근무현황<i class="glyphicon glyphicon-menu-right pull-right"></i>
+    </a>
+</li>
   </ul>
 </div>
