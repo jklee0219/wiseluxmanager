@@ -9,10 +9,7 @@ class Attendance extends CI_Controller
         include $_SERVER['DOCUMENT_ROOT'].'/comm/func.php';
         include $_SERVER['DOCUMENT_ROOT'].'/admn/application/controllers/commvar.php';
         include $_SERVER['DOCUMENT_ROOT'].'/admn/application/controllers/loginchk.php';
-        $this->load->model('Attendance_model');
-        
-        // 근무현황 권한 설정 로드
-        $this->config->load('attendance');
+        $this->load->model('attendance_model');
         
         // 접속체크
         $this->load->model('Access_model');
@@ -26,14 +23,6 @@ class Attendance extends CI_Controller
         }
         $id = !empty($this->session->userdata('ADM_ID')) ? $this->session->userdata('ADM_ID') : '';
         $this->Access_model->set_ip($id);
-    }
-    
-    // 권한 체크 함수
-    private function checkPermission()
-    {
-        $user_id = $this->session->userdata('ADM_ID');
-        $allowed_users = $this->config->item('attendance_managers');
-        return in_array($user_id, $allowed_users);
     }
     
     // 메인 리스트
@@ -119,7 +108,6 @@ class Attendance extends CI_Controller
             "annualCnt" => $annualCnt,
             "earlyCnt" => $earlyCnt,
             'alllist' => $alllist,
-            'has_permission' => $this->checkPermission(), // 권한 체크
         );
         
         $this->load->view('attendance/list', $data);
@@ -128,12 +116,6 @@ class Attendance extends CI_Controller
     // 등록 페이지
     function write()
     {
-        // 권한 체크
-        if(!$this->checkPermission()) {
-            doMsgLocation('권한이 없습니다.', '/admn/attendance');
-            return;
-        }
-        
         $page     = $this->input->get('page', TRUE) ? $this->input->get('page', TRUE) : 1;
         $sdate    = $this->input->get('sdate', TRUE);
         $edate    = $this->input->get('edate', TRUE);
@@ -158,12 +140,6 @@ class Attendance extends CI_Controller
     // 등록 처리
     function writeproc()
     {
-        // 권한 체크
-        if(!$this->checkPermission()) {
-            doMsgLocation('권한이 없습니다.', '/admn/attendance');
-            return;
-        }
-        
         $page     = $this->input->post('page', TRUE) ? $this->input->post('page', TRUE) : 1;
         $sdate    = $this->input->post('sdate', TRUE);
         $edate    = $this->input->post('edate', TRUE);
@@ -217,12 +193,6 @@ class Attendance extends CI_Controller
     // 수정 페이지
     function modify()
     {
-        // 권한 체크
-        if(!$this->checkPermission()) {
-            doMsgLocation('권한이 없습니다.', '/admn/attendance');
-            return;
-        }
-        
         $seq      = $this->input->get('seq', TRUE);
         $page     = $this->input->get('page', TRUE) ? $this->input->get('page', TRUE) : 1;
         $sdate    = $this->input->get('sdate', TRUE);
@@ -249,12 +219,6 @@ class Attendance extends CI_Controller
     // 수정 처리
     function modifyproc()
     {
-        // 권한 체크
-        if(!$this->checkPermission()) {
-            doMsgLocation('권한이 없습니다.', '/admn/attendance');
-            return;
-        }
-        
         $seq      = $this->input->post('seq', TRUE);
         $page     = $this->input->post('page', TRUE) ? $this->input->post('page', TRUE) : 1;
         $sdate    = $this->input->post('sdate', TRUE);
@@ -308,12 +272,6 @@ class Attendance extends CI_Controller
     // 삭제
     function delproc()
     {
-        // 권한 체크
-        if(!$this->checkPermission()) {
-            doMsgLocation('권한이 없습니다.', '/admn/attendance');
-            return;
-        }
-        
         $seq      = $this->input->get('seq', TRUE);
         $page     = $this->input->get('page', TRUE) ? $this->input->get('page', TRUE) : 1;
         $sdate    = $this->input->get('sdate', TRUE);
@@ -332,10 +290,8 @@ class Attendance extends CI_Controller
     // 엑셀 다운로드
     function excel()
     {
-        // 권한 체크
-        if(!$this->checkPermission()) {
-            doMsgLocation('권한이 없습니다.', '/admn/attendance');
-            return;
+        if(!in_array($this->session->userdata('ADM_AUTH'), array(3,9))){
+            doMsgLocation('잘못된 요청 입니다.', "http://".$_SERVER['HTTP_HOST']);
         }
         
         $condition = array();
