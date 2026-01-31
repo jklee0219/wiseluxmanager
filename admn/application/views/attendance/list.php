@@ -37,6 +37,10 @@
                                 <td class="bg">병가</td>
                                 <td class="txt"><?=number_format($sickCnt)?>건</td>
                             </tr>
+                            <tr>
+                                <td class="bg">기타</td>
+                                <td class="txt"><?=number_format($etcCnt)?>건</td>
+                            </tr>
                         </table>
                     </div>
                     <form name="searchFrm" action="/admn/attendance" method="get">
@@ -46,6 +50,7 @@
                                 <option value="연차" <?=($att_type=='연차') ? "selected='selected'" : ""?>>연차</option>
                                 <option value="반차" <?=($att_type=='반차') ? "selected='selected'" : ""?>>반차</option>
                                 <option value="병가" <?=($att_type=='병가') ? "selected='selected'" : ""?>>병가</option>
+                                <option value="기타" <?=($att_type=='기타') ? "selected='selected'" : ""?>>기타</option>
                             </select>
                         </div>
                         <div class="startdate_wrap">
@@ -114,7 +119,8 @@
                                 if($att_type_label == '연차') $type_color = 'color:#e74c3c;';        // 빨간색
                                 else if($att_type_label == '반차') $type_color = 'color:#f39c12;';   // 주황색
                                 else if($att_type_label == '병가') $type_color = 'color:#3498db;';   // 파란색
-                                else $type_color = 'color:#95a5a6;';                                  // 회색 (기타)
+                                else if($att_type_label == '기타') $type_color = 'color:#9b59b6;';   // 보라색
+                                else $type_color = 'color:#95a5a6;';                                  // 회색
                         ?>
                         <tr>
                             <td><?=$att_date?></td>
@@ -158,12 +164,13 @@
             var events = [
                 <?php foreach($alllist as $item){ ?>
                 { 
-                    title: '연차:<?=$item->annual_cnt?> 반차:<?=$item->half_cnt?> 병가:<?=$item->sick_cnt?>', 
+                    title: '연차:<?=$item->annual_cnt?> 반차:<?=$item->half_cnt?> 병가:<?=$item->sick_cnt?> 기타:<?=$item->etc_cnt?>', 
                     start: '<?=$item->att_date?>', 
-                    description: '연차: <?=$item->annual_cnt?>명<br>반차: <?=$item->half_cnt?>명<br>병가: <?=$item->sick_cnt?>명',
+                    description: '연차: <?=$item->annual_cnt?>명<br>반차: <?=$item->half_cnt?>명<br>병가: <?=$item->sick_cnt?>명<br>기타: <?=$item->etc_cnt?>명',
                     annualCnt: <?=$item->annual_cnt?>,
                     halfCnt: <?=$item->half_cnt?>,
-                    sickCnt: <?=$item->sick_cnt?>
+                    sickCnt: <?=$item->sick_cnt?>,
+                    etcCnt: <?=$item->etc_cnt?>
                 },
                 <?php } ?>
             ];
@@ -199,6 +206,7 @@
                     let annualCnt = arg.event.extendedProps.annualCnt;
                     let halfCnt = arg.event.extendedProps.halfCnt;
                     let sickCnt = arg.event.extendedProps.sickCnt;
+                    let etcCnt = arg.event.extendedProps.etcCnt;
                     
                     let html = '<div style="font-size:11px; padding:2px;">';
                     if(annualCnt > 0) {
@@ -209,6 +217,9 @@
                     }
                     if(sickCnt > 0) {
                         html += '<div style="color:#3498db;">병가:' + sickCnt + '</div>';
+                    }
+                    if(etcCnt > 0) {
+                        html += '<div style="color:#9b59b6;">기타:' + etcCnt + '</div>';
                     }
                     html += '</div>';
                     

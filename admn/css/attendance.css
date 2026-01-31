@@ -1,5 +1,11 @@
 /* 근무현황 페이지 스타일 */
 
+/* 달력 이벤트 배경색 */
+.fc-daygrid-event {
+    background-color: #eefcff !important;
+    border-color: #eefcff !important;
+}
+
 .amount_info_wrap {
     display: inline-block;
     margin-right: 15px;

@@ -64,6 +64,7 @@
 									<option value="연차" <?=($info->att_type == '연차') ? 'selected' : ''?>>연차</option>
 									<option value="반차" <?=($info->att_type == '반차') ? 'selected' : ''?>>반차</option>
 									<option value="병가" <?=($info->att_type == '병가') ? 'selected' : ''?>>병가</option>
+									<option value="기타" <?=($info->att_type == '기타') ? 'selected' : ''?>>기타</option>
 								</select>
 							</td>
 						</tr>

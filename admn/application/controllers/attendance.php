@@ -3,20 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Attendance extends CI_Controller
 {
-        // ========================================
-    // 🔒 권한 설정: 여기에 아이디 추가/삭제
-    // ========================================
-    private $allowed_users = array(
-        'admin',        // 예시 아이디 1
-        'lagerfeld',      // 예시 아이디 2
-        'dev',      // 예시 아이디 3
-        'wiseluxyong',      // 예시 아이디 4
-        'jhkim2232',      // 예시 아이디 5
-        // 아래에 추가하세요
-        // 'your_id',
-    );
-    // ========================================
-    
     function __construct()
     {
         parent::__construct();
@@ -74,6 +60,7 @@ class Attendance extends CI_Controller
         $annualCnt = $this->Attendance_model->getAnnualCnt();
         $halfCnt = $this->Attendance_model->getHalfCnt();
         $sickCnt = $this->Attendance_model->getSickCnt();
+        $etcCnt = $this->Attendance_model->getEtcCnt();
         
         // 페이징
         $total_page  = 0;
@@ -134,6 +121,7 @@ class Attendance extends CI_Controller
             "annualCnt" => $annualCnt,
             "halfCnt" => $halfCnt,
             "sickCnt" => $sickCnt,
+            "etcCnt" => $etcCnt,
             'alllist' => $alllist,
             'has_permission' => $this->checkPermission(), // 권한 체크
         );
@@ -386,7 +374,8 @@ class Attendance extends CI_Controller
         $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(30);
         
         $objPHPExcel->setActiveSheetIndex(0)
         ->setCellValue("A1", '날짜')
@@ -395,14 +384,15 @@ class Attendance extends CI_Controller
         ->setCellValue("D1", '연차')
         ->setCellValue("E1", '반차')
         ->setCellValue("F1", '병가')
-        ->setCellValue("G1", '비고');
+        ->setCellValue("G1", '기타')
+        ->setCellValue("H1", '비고');
         
-        $objPHPExcel->getActiveSheet()->getStyle("A1:G1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objPHPExcel->getActiveSheet()->getStyle("A1:G1")->getFill()->applyFromArray(array(
+        $objPHPExcel->getActiveSheet()->getStyle("A1:H1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle("A1:H1")->getFill()->applyFromArray(array(
             'type' => PHPExcel_Style_Fill::FILL_SOLID,
             'startcolor' => array( 'rgb' => 'f5ebed' )
         ));
-        $objPHPExcel->getActiveSheet()->getStyle("A1:G1")->applyFromArray(
+        $objPHPExcel->getActiveSheet()->getStyle("A1:H1")->applyFromArray(
             array(
                 'borders' => array(
                     'allborders' => array(
@@ -420,6 +410,7 @@ class Attendance extends CI_Controller
             $annual_use = ($v->att_type == '연차') ? 'O' : '';
             $half_use = ($v->att_type == '반차') ? 'O' : '';
             $sick_use = ($v->att_type == '병가') ? 'O' : '';
+            $etc_use = ($v->att_type == '기타') ? 'O' : '';
             $note = $v->note;
             
             $objPHPExcel->setActiveSheetIndex(0)
@@ -429,12 +420,13 @@ class Attendance extends CI_Controller
             ->setCellValue("D".($k+2), $annual_use)
             ->setCellValue("E".($k+2), $half_use)
             ->setCellValue("F".($k+2), $sick_use)
-            ->setCellValue("G".($k+2), $note);
+            ->setCellValue("G".($k+2), $etc_use)
+            ->setCellValue("H".($k+2), $note);
             
-            $objPHPExcel->getActiveSheet()->getStyle("A".($k+2).":G".($k+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+            $objPHPExcel->getActiveSheet()->getStyle("A".($k+2).":H".($k+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         }
         
-        $objPHPExcel->getActiveSheet()->getStyle('A1:G'.($k+2))->getFont()->setSize(10);
+        $objPHPExcel->getActiveSheet()->getStyle('A1:H'.($k+2))->getFont()->setSize(10);
         
         $objPHPExcel->getActiveSheet()->setTitle($filename);
         $objPHPExcel->setActiveSheetIndex(0);
